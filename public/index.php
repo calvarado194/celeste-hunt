@@ -68,10 +68,22 @@ $app->get('/{seed}', function (Request $request, Response $response, array $args
         }while(in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
 
         $removed_task_ids[] = $rand_task['task_id'];
-        $task_list[] = $rand_task;
+        $task_list[] = $rand_task['task_description'];
     }
 
-    $response->getBody()->write(json_encode($task_list));
+    $chapter_names = [
+        "Forsaken City",
+        "Old Site",
+        "Celestial Resort",
+        "Golden Ridge",
+        "Mirror Temple",
+	"Reflection",
+        "Summit"
+    ];
+
+    foreach($task_list as $key=>$task){
+        $response->getBody()->write('<strong>'.$chapter_names[$key]."</strong>: ".$task."<br>");
+    }
 
     return $response;
 });
