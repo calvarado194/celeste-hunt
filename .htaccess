@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+  <IfModule mod_negotiation.c>
+    Options -MultiViews
+  </IfModule>
+
+  RewriteEngine On
+  RewriteBase /celeste/
+
+  # Redirect Trailing Slashes...
+  RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+  # Whitelist only index.php, robots.txt, and those start with public/ or api/ or remote
+  RewriteRule ^(?!($|index\.php|robots\.txt|(public|api)/|remote)) - [R=404,L]
+
+  # Handle Front Controller...
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule .* index.php [L]
+</IfModule>
+

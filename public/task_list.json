@@ -1,0 +1,98 @@
+{
+"general":[
+{
+        "task_id":0,
+        "strawb":true,
+        "task_description": "Collect 5 strawberries"
+},{
+        "task_id":1,
+        "strawb":true,
+        "task_description": "Collect 10 strawberries"
+},{
+        "task_id":15,
+        "strawb":true,
+        "task_description": "Collect all Strawberries"
+},{
+        "task_id":5,
+        "strawb":true,
+        "task_description": "Collect a winged strawberry"
+},{
+        "task_id":2,
+        "task_description": "Collect Cassette Tape"
+},{
+        "task_id":3,
+        "task_description": "Collect Crystal Heart"
+}
+],
+"1":[
+{
+        "task_id":4,
+        "task_description": "Find and Talk to Theo"
+},{
+        "task_id":6,
+        "task_description": "Beat 3 rooms without dashing"
+}
+],
+"2":[
+{
+        "task_id":4,
+        "task_description": "Find and Talk to Theo"
+},{
+        "task_id":7,
+        "task_description": "Collect all strawberries in the Intervention sequence"
+}
+],
+"3":[
+{
+        "task_id":8,
+        "task_description": "Find and beat Celeste PICO-8"
+},{
+        "task_id":7,
+        "task_description": "Collect all strawberries in the Escape sequence"
+}
+],
+"4":[
+{
+        "task_id":9,
+        "task_description": "Bounce off 3 snowballs"
+}
+],
+"5":[
+{
+        "task_id":4,
+        "task_description": "Find and talk to Theo from the other side of the spiked room"
+},{
+        "task_id":7,
+        "task_description": "Collect the Strawberry at crystal Theo's sequence"
+}
+],
+"6":[
+{
+        "task_id":10,
+        "task_description": "Reach the Towerfall room"
+},{
+        "task_id":11,
+        "task_description": "Hit a Kevin Block in all 4 sides"
+},{
+        "task_id":12,
+        "task_description": "Take all feathers in dream sequence"
+},{
+        "task_id":16,
+        "task_description": "Perform Lake Skip"
+},{
+        "task_id":17,
+        "task_description": "Collect all feathers in room before Old Lady"
+}
+],
+
+"7":[
+{
+        "task_id":13,
+        "task_description": "Collect 3 jewels"
+},{
+        "task_id":14,
+        "task_description": "Activate all checkpoints in 3000m"
+}
+]
+}
+
