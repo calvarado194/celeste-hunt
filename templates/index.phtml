@@ -2,37 +2,80 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Slim 3</title>
+        <title>Celeste Bingo</title>
+        <link rel="shortcut icon" href="/celeste/public/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/celeste/public/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 0;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-                color: #aaa;
-                font-size: 18px;
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+            @font-face {
+                font-family: Renogare;
+                src: url("../public/Renogare-Regular.otf") format("opentype");
             }
 
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
+            body{
+                max-width:650px;
+                margin:0 auto;
+                color: #444;
+                font-family:"Helvetica, Arial, sans-serif";
+            }
+            #layout{
+                padding: 0 10px;
+            }
+            .footer{
+                position:absolute;
+                padding: 16px;
+                font-size: 12px;
+            }
+            .celeste-font{
+                font-family: 'Renogare', Arial, sans-serif;
+            }
+            .subhead{
+                margin-top: 1em;
+                color: #888;
             }
         </style>
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
-
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
-        <?php endif; ?>
+        <div id="layout">
+        <div id="main">
+        <div class="header">
+            <h1 class="celeste-font" style="padding-left:16px;">Celeste Bingo</h1>
+        </div>
+        <div class="content">
+        <div class="pure-g">
+        <div class="pure-u-1">
+        <table class="pure-table pure-table-striped" style="width: 100%">
+            <?php foreach($task_list as $chapter => $task): ?>
+                <tr>
+                    <td class="celeste-font"><?=$chapter ?></td>
+                    <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <a style="float: right;margin-top: 10px;" href="https://oneninefour.cl/celeste/public/" class="pure-button celeste-font">Reseed</a>
+        </div>
+        </div>
+        <div class="pure-g" style="padding:0 16px;">
+            <div class="pure-u-1 u-sm-1-2">
+                <h2 class="celeste-font subhead">What's this?</h2>
+                <p>Inspired by the <a href="http://www.speedrunslive.com/tools/oot-bingo/" target="_blank">Ocarina of Time Bingo</a>, the Celeste Bingo generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.<p>
+                <p>Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.</p>
+            </div>
+        </div>
+        </div>
+        <div class="footer">
+            <div class="credits pure-g">
+                <div class="pure-u-1 u-sm-1-2">
+                    Made with love by <a href="https://twitter.com/this194" target="_blank">Ikuyo</a><br>
+                    Source code available <a href="https://github.com/calvarado194/celeste-bingo" target="_blank">here</a> and Licensed under MIT License<br> 
+                    Celeste is owned by Matt Makes Games. Thanks for making this game, guys.
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
     </body>
 </html>

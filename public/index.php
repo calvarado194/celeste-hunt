@@ -2,6 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \ParagonIE\SeedSpring\SeedSpring;
+use \Slim\Views\PhpRenderer;
 
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
@@ -28,18 +29,16 @@ require __DIR__ . '/../src/dependencies.php';
 require __DIR__ . '/../src/middleware.php';
 
 // Register routes
-require __DIR__ . '/../src/routes.php';
 
 // Run app
 
-$app = new \Slim\App;
 $app->get('/', function (Request $request, Response $response, array $args) {
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
 
     return $response->withRedirect('/celeste/public/'.$seed);
 });
-$app->get('/{seed}', function (Request $request, Response $response, array $args) {
+$app->get('/{seed:\S+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
@@ -48,6 +47,16 @@ $app->get('/{seed}', function (Request $request, Response $response, array $args
     $removed_task_ids = [];
 
     $rng = new SeedSpring($seed);
+
+    $chapter_names = [
+        "Forsaken City",
+        "Old Site",
+        "Celestial Resort",
+        "Golden Ridge",
+        "Mirror Temple",
+        "Reflection",
+        "Summit"
+    ];
 
     for($chapter = 1;$chapter <=7; $chapter++){
         $merged_list = array_merge($task_library['general'],$task_library[$chapter]);
@@ -68,23 +77,10 @@ $app->get('/{seed}', function (Request $request, Response $response, array $args
         }while(in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
 
         $removed_task_ids[] = $rand_task['task_id'];
-        $task_list[] = $rand_task['task_description'];
+        $task_list[$chapter_names[$chapter -1]] = $rand_task['task_description'];
     }
 
-    $chapter_names = [
-        "Forsaken City",
-        "Old Site",
-        "Celestial Resort",
-        "Golden Ridge",
-        "Mirror Temple",
-	"Reflection",
-        "Summit"
-    ];
-
-    foreach($task_list as $key=>$task){
-        $response->getBody()->write('<strong>'.$chapter_names[$key]."</strong>: ".$task."<br>");
-    }
-
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
     return $response;
 });
 
