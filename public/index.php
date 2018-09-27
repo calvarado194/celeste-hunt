@@ -60,7 +60,7 @@ $app->get('/{seed}', function (Request $request, Response $response, array $args
                 }
             }
 
-            $merge_list = array_values($merged_list);
+            $merged_list = array_values($merged_list);
         }
 
 	do{
