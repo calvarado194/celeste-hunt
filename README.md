@@ -15,8 +15,6 @@ Source code is licensed under the MIT License.
 
 ## Special Thanks
 
-Thanks to the Celeste development team for making a game I will never forget.
-
-Thanks to several friends that provided UX testing and assistance with front-end design.
-
+Thanks to the Celeste development team for making a game I will never forget.  
+Thanks to several friends that provided UX testing and assistance with front-end design.  
 Special thanks to Mathemagician for seed logic.
