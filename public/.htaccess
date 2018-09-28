@@ -9,8 +9,6 @@
   # work in environments without path prefix as well, providing a safe, one-size
   # fits all solution. But as you do not need it in this case, you can comment
   # the following 2 lines to eliminate the overhead.
-  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
-  RewriteRule ^(.*) - [E=BASE:%1]
   
   # If the above doesn't work you might need to set the `RewriteBase` directive manually, it should be the
   # absolute physical path to the directory that contains this htaccess file.
