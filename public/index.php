@@ -32,13 +32,13 @@ require __DIR__ . '/../src/middleware.php';
 
 // Run app
 
-$app->get('/', function (Request $request, Response $response, array $args) {
+$app->get('/celeste/', function (Request $request, Response $response, array $args) {
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
 
-    return $response->withRedirect('/celeste/public/'.$seed);
+    return $response->withRedirect('/celeste/'.$seed);
 });
-$app->get('/{seed:\S+}', function (Request $request, Response $response, array $args) {
+$app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
