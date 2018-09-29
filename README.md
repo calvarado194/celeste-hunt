@@ -3,7 +3,7 @@ A shared-seed bingo randomizer for Celeste speedruns!
 
 ## Usage
 
-Powered by [Slim](https://www.slimframework.com/) and [SeedSpring](https://github.com/paragonie/seedspring), Bingo runs a seeded pesudo-RNG that provides bingo cards for Celeste speedruns. Common usage instructions can be found on the website itself, [here](https://oneninefour.cl/celeste/public/).
+Powered by [Slim](https://www.slimframework.com/) and [SeedSpring](https://github.com/paragonie/seedspring), Bingo runs a seeded pesudo-RNG that provides bingo cards for Celeste speedruns. Common usage instructions can be found on the website itself, [here](https://oneninefour.cl/celeste/).
 
 ## API Endpoint
 
@@ -18,4 +18,4 @@ Source code is licensed under the MIT License.
 Thanks to the Celeste development team for making a game I will never forget.  
 Thanks to several friends that provided UX testing and assistance with front-end design.  
 Special thanks to Mathemagician for seed logic.
-Special thanks to SebasContre for additional coding and fixes.
+Special thanks to [SebasContre](https://twitter.com/sebascontre) for additional coding and fixes.
