@@ -11,7 +11,7 @@
 },{
         "task_id":15,
         "strawb":true,
-        "task_description": "Collect all Strawberries"
+        "task_description": "Collect all strawberries"
 },{
         "task_id":5,
         "strawb":true,
@@ -27,19 +27,22 @@
 "1":[
 {
         "task_id":4,
-        "task_description": "Find and Talk to Theo"
+        "task_description": "Find and talk to Theo"
 },{
         "task_id":6,
-        "task_description": "Beat 3 rooms without dashing"
+        "task_description": "Beat 5 rooms without dashing"
 }
 ],
 "2":[
 {
         "task_id":4,
-        "task_description": "Find and Talk to Theo"
+        "task_description": "Find and talk to Theo"
 },{
         "task_id":7,
         "task_description": "Collect all strawberries in the Intervention sequence"
+},{
+        "task_id":20,
+        "task_description": "Get to the room prior to Intervention cutscene before activating dream blocks"
 }
 ],
 "3":[
@@ -47,14 +50,20 @@
         "task_id":8,
         "task_description": "Find and beat Celeste PICO-8"
 },{
+        "task_id":19,
+        "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
+},{
         "task_id":7,
-        "task_description": "Collect all strawberries in the Escape sequence"
+        "task_description": "Collect all strawberries in the Presidential Suite sequence"
 }
 ],
 "4":[
 {
         "task_id":9,
         "task_description": "Bounce off 3 snowballs"
+},{
+	"task_id":22,
+	"task_description": "Take the hidden path to Cliff Face"
 }
 ],
 "5":[
@@ -63,7 +72,13 @@
         "task_description": "Activate the Theo cutscene in the Search sequence"
 },{
         "task_id":7,
-        "task_description": "Collect the Strawberry at crystal Theo's sequence"
+        "task_description": "Collect the strawberry during the crystal Theo sequence"
+},{
+        "task_id":18,
+        "task_description": "Kill a seeker"
+},{
+        "task_id":22,
+        "task_description": "Collect all 3 keys in Search"
 }
 ],
 "6":[
@@ -72,16 +87,13 @@
         "task_description": "Reach the Towerfall room"
 },{
         "task_id":11,
-        "task_description": "Hit a Kevin Block in all 4 sides"
+        "task_description": "Hit all 4 sides of a single Kevin Block"
 },{
         "task_id":12,
-        "task_description": "Take all feathers in dream sequence"
-},{
-        "task_id":16,
-        "task_description": "Perform Lake Skip"
+        "task_description": "Collect all feathers in the dream sequence"
 },{
         "task_id":17,
-        "task_description": "Collect all feathers in room before Old Lady"
+        "task_description": "Collect all feathers in the room before Old Lady"
 }
 ],
 
@@ -92,7 +104,12 @@
 },{
         "task_id":14,
         "task_description": "Activate all checkpoints in 3000m"
+},{
+        "task_id":21,
+        "task_description": "Skip 5 checkpoints in 3000m"
+},{
+	"task_id":23,
+	"task_description": "Take the rightmost path at 1000m"
 }
 ]
 }
-
