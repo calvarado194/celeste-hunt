@@ -43,17 +43,39 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
     //hash and substring input to get seed
-    $seed = substr(md5('74dPU18G'.$seed),0,16);
 
     $task_list = getTaskList($seed);
     $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
     return $response;
 });
 
+//API methods
+$app->post('/celeste/', function (Request $request, Response $response, array $args) {
+    //generate semirandom seed based on a hash of current timestamp
+    $date = date('YmdHis');
+    $seed = substr(md5($date),0,16);
+    
+    $task_list = getTaskList($seed);
+
+    $data = ['seed' => $seed, 'list' => $task_list];
+    return $response->withJson($data);    
+});
+
+$app->post('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
+    $seed = $args['seed'];
+    $task_list = getTaskList($seed);
+
+    $data = ['seed' => $seed, 'list' => $task_list];
+    return $response->withJson($data);
+});
+
+
 $app->run();
 
 //randomization logic -- create task list given seed
 function getTaskList($seed){
+    $seed = substr(md5('74dPU18G'.$seed),0,16);
+
     //retrieve task library and init vars 
     $task_library = json_decode(file_get_contents('task_list.json'), true);
     $task_list = [];

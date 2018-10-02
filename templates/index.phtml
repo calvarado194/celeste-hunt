@@ -36,6 +36,11 @@
                 margin-top: 1em;
                 color: #888;
             }
+            @media only screen and (min-width:768px){
+                .chapter-header{
+                    min-width: 140px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -50,7 +55,7 @@
         <table class="pure-table pure-table-striped" style="width: 100%">
             <?php foreach($task_list as $chapter => $task): ?>
                 <tr>
-                    <td class="celeste-font"><?=$chapter ?></td>
+                    <td class="celeste-font chapter-header"><?=$chapter ?></td>
                     <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
                 </tr>
             <?php endforeach; ?>
