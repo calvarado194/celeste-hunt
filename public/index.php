@@ -39,6 +39,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
 
     return $response->withRedirect('/celeste/'.$seed);
 });
+
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
     //hash and substring input to get seed
@@ -60,7 +61,7 @@ function getTaskList($seed){
 
     //init RNG
     $rng = new SeedSpring($seed);
-
+	
     $chapter_names = [
         "Forsaken City",
         "Old Site",
@@ -70,6 +71,7 @@ function getTaskList($seed){
         "Reflection",
         "Summit"
     ];
+
 
     //get task per chapter
     for($chapter = 1;$chapter <=7; $chapter++){
@@ -82,7 +84,6 @@ function getTaskList($seed){
         }
 
         //Replace list weights with accumulated weight values
-        
         $sum = 0;
         for ($i = 0; $i < count($merged_list); $i++) {
             $item = $merged_list[$i];
@@ -110,7 +111,6 @@ function getTaskList($seed){
             if($rand_task == null){
                 $rand_task = $merged_list[count($merged_list)-1];
             }
-
         } while((array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'],$removed_task_ids)));
         //Add task ID to used list, if present
         if (array_key_exists('task_id', $rand_task)) {
