@@ -1,38 +1,38 @@
 {
     "general": [
         {
-            "task_id": 0,
+            "task_id": "cassette",
             "task_description": "Collect Cassette Tape"
         },
         {
-            "task_id": 1,
+            "task_id": "heart",
             "task_description": "Collect Crystal Heart"
         }
     ],
     "strawberry": [
         {
-            "task_id": 2,
+            "task_id": "nBerries",
             "weight": 0.4,
             "task_description": "Collect 5 strawberries"
         },
         {
-            "task_id": 2,
+            "task_id": "nBerries",
             "weight": 0.4,
             "task_description": "Collect 10 strawberries"
         },
         {
-            "task_id": 2,
+            "task_id": "nBerries",
             "weight": 0.2,
             "task_description": "Collect all strawberries"
         },
         {
-            "task_id": 3,
+            "task_id": "winged",
             "task_description": "Collect a winged strawberry"
         }
     ],
     "1": [
         {
-            "task_id": 4,
+            "task_id": "theo",
             "task_description": "Find and talk to Theo"
         },
         {
@@ -41,11 +41,11 @@
     ],
     "2": [
         {
-            "task_id": 4,
+            "task_id": "theo",
             "task_description": "Find and talk to Theo"
         },
         {
-            "task_id": 5,
+            "task_id": "sequenceBerries",
             "task_description": "Collect all strawberries in the Intervention sequence"
         },
         {
@@ -62,7 +62,7 @@
             "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
         },
         {
-            "task_id": 5,
+            "task_id": "sequenceBerries",
             "task_description": "Collect all strawberries in the Presidential Suite sequence"
         },
         {
@@ -99,7 +99,7 @@
             "task_description": "Activate the Theo cutscene in the Search sequence"
         },
         {
-            "task_id": 2,
+            "task_id": "sequenceBerries",
             "task_description": "Collect the strawberry during the crystal Theo sequence"
         },
         {
