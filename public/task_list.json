@@ -1,37 +1,38 @@
 {
     "general": [
         {
+            "task_id": 0,
             "task_description": "Collect Cassette Tape"
         },
         {
+            "task_id": 1,
             "task_description": "Collect Crystal Heart"
         }
     ],
     "strawberry": [
         {
-            "weight": 0.3,
-            "strawb": true,
+            "task_id": 2,
+            "weight": 0.4,
             "task_description": "Collect 5 strawberries"
         },
         {
-            "weight": 0.3,
-            "strawb": true,
+            "task_id": 2,
+            "weight": 0.4,
             "task_description": "Collect 10 strawberries"
         },
         {
-            "weight": 0.1,
-            "strawb": true,
+            "task_id": 2,
+            "weight": 0.2,
             "task_description": "Collect all strawberries"
         },
         {
-            "weight": 0.3,
-            "strawb": true,
+            "task_id": 3,
             "task_description": "Collect a winged strawberry"
         }
     ],
     "1": [
         {
-            "task_id": 1,
+            "task_id": 4,
             "task_description": "Find and talk to Theo"
         },
         {
@@ -40,11 +41,11 @@
     ],
     "2": [
         {
-            "task_id": 1,
+            "task_id": 4,
             "task_description": "Find and talk to Theo"
         },
         {
-            "task_id": 2,
+            "task_id": 5,
             "task_description": "Collect all strawberries in the Intervention sequence"
         },
         {
@@ -61,7 +62,7 @@
             "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
         },
         {
-            "task_id": 2,
+            "task_id": 5,
             "task_description": "Collect all strawberries in the Presidential Suite sequence"
         },
         {
