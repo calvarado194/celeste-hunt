@@ -38,6 +38,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
 
     return $response->withRedirect('/celeste/'.$seed);
 });
+
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
     $seed = substr(md5('74dPU18G'.$seed),0,16);
@@ -58,29 +59,51 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
         "Summit"
     ];
 
-    for($chapter = 1;$chapter <=7; $chapter++){
+    for ($chapter = 1; $chapter <= 7; $chapter++) {
+        //Combine the tasks for the current chapter with the general tasks
         $merged_list = array_merge($task_library['general'],$task_library[$chapter]);
 
-        //exclude strawberry-related tasks from chapter 6
-        if($chapter == 6){
-            foreach($merged_list as $key => $task){
-                if(array_key_exists('strawb',$task)){
-                    unset($merged_list[$key]);
-                }
-            }
-
-            $merged_list = array_values($merged_list);
+        //Exclude strawberry-related tasks from Chapter 6
+        if ($chapter != 6) {
+            $merged_list = array_merge($merged_list,$task_library['strawberry']);
         }
 
-	do{
-            $rand_task = $merged_list[$rng->getInt(0, count($merged_list) -1)];
-        }while(in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
+        //Replace list weights with accumulated weight values
+        foreach ($merged_list as &$item) {
+            if (array_key_exists($item['weight'])) {
+                $temp = $item['weight'];
+            }
+            //Use default weight of 1 if not specified
+            else {
+                $temp = 1;
+            }
 
-        $removed_task_ids[] = $rand_task['task_id'];
-        $task_list[$chapter_names[$chapter -1]] = $rand_task['task_description'];
+            $item['weight'] = $sum;
+            $sum += $temp;
+        }
+
+        //Pick a random task. Skip over tasks that have an already used task ID
+	    do {
+            $rand = $rng->getFloat(0, $sum);
+
+            foreach($merged_list as &$item) {
+                if ($rand >= $item['weight']) {
+                    $rand_task = $item;
+                    break;
+                }
+            }
+        } while(array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
+
+        //Add task ID to used list, if present
+        if (array_key_exists('task_id', $rand_task)) {
+            $removed_task_ids[] = $rand_task['task_id'];
+        }
+
+        $task_list[$chapter_names[$chapter - 1]] = $rand_task['task_description'];
     }
 
     $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
+
     return $response;
 });
 
