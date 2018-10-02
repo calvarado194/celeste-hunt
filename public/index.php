@@ -48,7 +48,7 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
     $removed_task_ids = [];
 
     $rng = new SeedSpring($seed);
-
+	
     $chapter_names = [
         "Forsaken City",
         "Old Site",
@@ -86,7 +86,7 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
 	    do {
             $rand = $rng->getFloat(0, $sum);
 
-            foreach($merged_list as &$item) {
+            foreach($merged_list as $item) {
                 if ($rand >= $item['weight']) {
                     $rand_task = $item;
                     break;
