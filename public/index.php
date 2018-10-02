@@ -33,6 +33,7 @@ require __DIR__ . '/../src/middleware.php';
 // Run app
 
 $app->get('/celeste/', function (Request $request, Response $response, array $args) {
+    //generate semirandom seed based on a hash of current timestamp
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
 
@@ -41,12 +42,24 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
 
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
+    //hash and substring input to get seed
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
+    $task_list = getTaskList($seed);
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
+    return $response;
+});
+
+$app->run();
+
+//randomization logic -- create task list given seed
+function getTaskList($seed){
+    //retrieve task library and init vars 
     $task_library = json_decode(file_get_contents('task_list.json'), true);
     $task_list = [];
     $removed_task_ids = [];
 
+    //init RNG
     $rng = new SeedSpring($seed);
 	
     $chapter_names = [
@@ -59,52 +72,53 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
         "Summit"
     ];
 
-    for ($chapter = 1; $chapter <= 7; $chapter++) {
-        //Combine the tasks for the current chapter with the general tasks
+
+    //get task per chapter
+    for($chapter = 1;$chapter <=7; $chapter++){
+        //gen possible tasks for the chaptr
         $merged_list = array_merge($task_library['general'],$task_library[$chapter]);
 
-        //Exclude strawberry-related tasks from Chapter 6
+        //exclude strawberry-related tasks from chapter 6
         if ($chapter != 6) {
             $merged_list = array_merge($merged_list,$task_library['strawberry']);
         }
 
         //Replace list weights with accumulated weight values
-        foreach ($merged_list as &$item) {
-            if (array_key_exists($item['weight'])) {
+        $sum = 0;
+        for ($i = 0; $i < count($merged_list); $i++) {
+            $item = $merged_list[$i];
+            if (array_key_exists('weight',$item)) {
                 $temp = $item['weight'];
             }
             //Use default weight of 1 if not specified
             else {
                 $temp = 1;
             }
-
             $item['weight'] = $sum;
             $sum += $temp;
         }
 
-        //Pick a random task. Skip over tasks that have an already used task ID
-	    do {
-            $rand = $rng->getFloat(0, $sum);
-
-            foreach($merged_list as $item) {
-                if ($rand >= $item['weight']) {
-                    $rand_task = $item;
+        //obtain task avoiding repeating ones
+        do {
+            $rand = $sum*($rng->getInt(0, 100)/100);
+            $rand_task = null;
+            for($i = 0; $i < count($merged_list)-1; $i++) {
+                if($rand <= $merged_list[$i+1]['weight']){
+                    $rand_task = $merged_task[$i];
                     break;
                 }
             }
-        } while(array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
-
+            if($rand_task == null){
+                $rand_task = $merged_list[count($merged_list)-1];
+            }
+        } while((array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'],$removed_task_ids)));
         //Add task ID to used list, if present
         if (array_key_exists('task_id', $rand_task)) {
             $removed_task_ids[] = $rand_task['task_id'];
         }
 
-        $task_list[$chapter_names[$chapter - 1]] = $rand_task['task_description'];
+        $task_list[$chapter_names[$chapter -1]] = $rand_task['task_description'];
     }
-
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
-
-    return $response;
-});
-
-$app->run();
+    
+    return $task_list;
+}
