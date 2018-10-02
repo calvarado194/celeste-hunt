@@ -94,17 +94,17 @@ function getTaskList($seed){
             else {
                 $temp = 1;
             }
-            $item['weight'] = $sum;
             $sum += $temp;
+            $merged_list[$i]['weight'] = $sum;
         }
 
         //obtain task avoiding repeating ones
         do {
             $rand = $sum*($rng->getInt(0, 100)/100);
             $rand_task = null;
-            for($i = 0; $i < count($merged_list)-1; $i++) {
-                if($rand <= $merged_list[$i+1]['weight']){
-                    $rand_task = $merged_task[$i];
+            for($i = 0; $i < count($merged_list); $i++) {
+                if($rand <= $merged_list[$i]['weight']){
+                    $rand_task = $merged_list[$i];
                     break;
                 }
             }
