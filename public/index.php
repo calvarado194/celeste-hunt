@@ -94,14 +94,15 @@ function getTaskList($seed){
     ];
 
     $chapters = [1, 2, 3, 4, 5, 6, 7];
-
+    $chapter_container = [];
     //Get a task for each chapter
     while (count($chapters) > 0) {
         //Pick chapters in a random order so that tasks with IDs don't cluster in earlier chapters
         $index = $rng->getInt(0, count($chapters) - 1);
-        $chapter = $chapters[$index]];
+        $chapter = $chapters[$index];
 
         unset($chapters[$index]);
+        $chapters = array_values($chapters);
 
         //Generate possible tasks for the chapter
         $merged_list = array_merge($task_library['general'], $task_library[$chapter]);
@@ -151,8 +152,18 @@ function getTaskList($seed){
             $removed_task_ids[] = $rand_task['task_id'];
         }
 
-        $task_list[$chapter_names[$chapter - 1]] = $rand_task['task_description'];
+        $chapter_container[$chapter - 1] = [
+            'name' => $chapter_names[$chapter - 1],
+            'task' => $rand_task['task_description']
+        ];
     }
+
+    for($i = 0; $i < count($chapter_container); $i++){
+        $chapter_data = $chapter_container[$i];
+        $task_list[$chapter_data['name']] = $chapter_data['task'];
+
+    }
+
 
     return $task_list;
 }
