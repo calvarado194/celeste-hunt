@@ -28,6 +28,10 @@
         {
             "task_id": "winged",
             "task_description": "Collect a winged strawberry"
+        },
+        {
+            "task_id": "chainBerries",
+            "task_description": "Collect 3 strawberries simultaneously"
         }
     ],
     "1": [
@@ -37,6 +41,9 @@
         },
         {
             "task_description": "Beat 5 rooms without dashing"
+        },
+        {
+            "task_description": "Activate no more than 3 traffic blocks"
         }
     ],
     "2": [
@@ -96,6 +103,7 @@
     ],
     "5": [
         {
+            "task_id": "theo",
             "task_description": "Activate the Theo cutscene in the Search sequence"
         },
         {
@@ -107,6 +115,9 @@
         },
         {
             "task_description": "Collect all 3 keys in Search"
+        },
+        {
+            "task_description": "Destroy 5 red blocks using seekers"
         }
     ],
     "6": [
