@@ -1,115 +1,146 @@
 {
-"general":[
-{
-        "task_id":0,
-        "strawb":true,
-        "task_description": "Collect 5 strawberries"
-},{
-        "task_id":1,
-        "strawb":true,
-        "task_description": "Collect 10 strawberries"
-},{
-        "task_id":15,
-        "strawb":true,
-        "task_description": "Collect all strawberries"
-},{
-        "task_id":5,
-        "strawb":true,
-        "task_description": "Collect a winged strawberry"
-},{
-        "task_id":2,
-        "task_description": "Collect Cassette Tape"
-},{
-        "task_id":3,
-        "task_description": "Collect Crystal Heart"
-}
-],
-"1":[
-{
-        "task_id":4,
-        "task_description": "Find and talk to Theo"
-},{
-        "task_id":6,
-        "task_description": "Beat 5 rooms without dashing"
-}
-],
-"2":[
-{
-        "task_id":4,
-        "task_description": "Find and talk to Theo"
-},{
-        "task_id":7,
-        "task_description": "Collect all strawberries in the Intervention sequence"
-},{
-        "task_id":20,
-        "task_description": "Get to the room prior to Intervention cutscene before activating dream blocks"
-}
-],
-"3":[
-{
-        "task_id":8,
-        "task_description": "Find and beat Celeste PICO-8"
-},{
-        "task_id":19,
-        "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
-},{
-        "task_id":7,
-        "task_description": "Collect all strawberries in the Presidential Suite sequence"
-}
-],
-"4":[
-{
-        "task_id":9,
-        "task_description": "Bounce off 3 snowballs"
-},{
-	"task_id":22,
-	"task_description": "Take the hidden path to Cliff Face"
-}
-],
-"5":[
-{
-        "task_id":4,
-        "task_description": "Activate the Theo cutscene in the Search sequence"
-},{
-        "task_id":7,
-        "task_description": "Collect the strawberry during the crystal Theo sequence"
-},{
-        "task_id":18,
-        "task_description": "Kill a seeker"
-},{
-        "task_id":22,
-        "task_description": "Collect all 3 keys in Search"
-}
-],
-"6":[
-{
-        "task_id":10,
-        "task_description": "Reach the Towerfall room"
-},{
-        "task_id":11,
-        "task_description": "Hit all 4 sides of a single Kevin Block"
-},{
-        "task_id":12,
-        "task_description": "Collect all feathers in the dream sequence"
-},{
-        "task_id":17,
-        "task_description": "Collect all feathers in the room before Old Lady"
-}
-],
+    "general": [
+        {
+            "task_id": "cassette",
+            "task_description": "Collect Cassette Tape"
+        },
+        {
+            "task_id": "heart",
+            "task_description": "Collect Crystal Heart"
+        }
+    ],
+    "strawberry": [
+        {
+            "task_id": "nBerries",
+            "weight": 0.4,
+            "task_description": "Collect 5 strawberries"
+        },
+        {
+            "task_id": "nBerries",
+            "weight": 0.4,
+            "task_description": "Collect 10 strawberries"
+        },
+        {
+            "task_id": "nBerries",
+            "weight": 0.2,
+            "task_description": "Collect all strawberries"
+        },
+        {
+            "task_id": "winged",
+            "task_description": "Collect a winged strawberry"
+        }
+    ],
+    "1": [
+        {
+            "task_id": "theo",
+            "task_description": "Find and talk to Theo"
+        },
+        {
+            "task_description": "Beat 5 rooms without dashing"
+        }
+    ],
+    "2": [
+        {
+            "task_id": "theo",
+            "task_description": "Find and talk to Theo"
+        },
+        {
+            "task_id": "sequenceBerries",
+            "task_description": "Collect all strawberries in the Intervention sequence"
+        },
+        {
+            "task_description": "Get to the room prior to Intervention cutscene before activating dream blocks"
+        }
+    ],
+    "3": [
+        {
+            "weight": 0.5,
+            "task_description": "Find and beat Celeste PICO-8"
+        },
+        {
+            "weight": 0.5,
+            "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
+        },
+        {
+            "task_id": "sequenceBerries",
+            "task_description": "Collect all strawberries in the Presidential Suite sequence"
+        },
+        {
+            "weight": 0.2,
+            "task_description": "Complete the Huge Mess sequence boxes first, books last"
+        },
+        {
+            "weight": 0.2,
+            "task_description": "Complete the Huge Mess sequence books first, boxes last"
+        },
+        {
+            "weight": 0.2,
+            "task_description": "Complete the Huge Mess sequence books first, laundry last"
+        },
+        {
+            "weight": 0.2,
+            "task_description": "Complete the Huge Mess sequence laundry first, boxes last"
+        },
+        {
+            "weight": 0.2,
+            "task_description": "Complete the Huge Mess sequence laundry first, books last"
+        }
+    ],
+    "4": [
+        {
+            "task_description": "Bounce off 3 snowballs"
+        },
+        {
+            "task_description": "Take the hidden path to Cliff Face"
+        }
+    ],
+    "5": [
+        {
+            "task_description": "Activate the Theo cutscene in the Search sequence"
+        },
+        {
+            "task_id": "sequenceBerries",
+            "task_description": "Collect the strawberry during the crystal Theo sequence"
+        },
+        {
+            "task_description": "Kill a seeker"
+        },
+        {
+            "task_description": "Collect all 3 keys in Search"
+        }
+    ],
+    "6": [
+        {
+            "task_description": "Reach the Towerfall room"
+        },
+        {
+            "task_description": "Hit all 4 sides of a single Kevin Block"
+        },
+        {
+            "weight": 0.5,
+            "task_description": "Collect all feathers in the dream sequence"
+        },
+        {
+            "weight": 0.5,
+            "task_description": "Collect all feathers in the room before Old Lady"
+        }
+    ],
 
-"7":[
-{
-        "task_id":13,
-        "task_description": "Collect 3 jewels"
-},{
-        "task_id":14,
-        "task_description": "Activate all checkpoints in 3000m"
-},{
-        "task_id":21,
-        "task_description": "Skip 5 checkpoints in 3000m"
-},{
-	"task_id":23,
-	"task_description": "Take the rightmost path at 1000m"
+    "7": [
+        {
+            "task_description": "Collect 3 jewels"
+        },
+        {
+            "weight": 0.5,
+            "task_description": "Activate all checkpoints in 3000m"
+        },
+        {
+            "weight": 0.5,
+            "task_description": "Skip 5 checkpoints in 3000m"
+        },
+        {
+            "task_description": "Take the rightmost path at 1000m"
+        }
+    ]
 }
-]
-}
+
