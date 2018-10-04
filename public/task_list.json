@@ -12,12 +12,12 @@
     "strawberry": [
         {
             "task_id": "nBerries",
-            "weight": 0.4,
+            "weight": 0.6,
             "task_description": "Collect 5 strawberries"
         },
         {
             "task_id": "nBerries",
-            "weight": 0.4,
+            "weight": 0.6,
             "task_description": "Collect 10 strawberries"
         },
         {
@@ -27,7 +27,12 @@
         },
         {
             "task_id": "winged",
+            "weight": 0.6,
             "task_description": "Collect a winged strawberry"
+        },
+        {
+            "task_id": "chainBerries",
+            "task_description": "Collect 3 strawberries simultaneously"
         }
     ],
     "1": [
@@ -37,6 +42,9 @@
         },
         {
             "task_description": "Beat 5 rooms without dashing"
+        },
+        {
+            "task_description": "Activate no more than 3 traffic blocks"
         }
     ],
     "2": [
@@ -96,6 +104,7 @@
     ],
     "5": [
         {
+            "task_id": "theo",
             "task_description": "Activate the Theo cutscene in the Search sequence"
         },
         {
@@ -107,6 +116,9 @@
         },
         {
             "task_description": "Collect all 3 keys in Search"
+        },
+        {
+            "task_description": "Destroy 5 red blocks using seekers"
         }
     ],
     "6": [

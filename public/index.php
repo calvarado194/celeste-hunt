@@ -53,11 +53,11 @@ $app->post('/celeste/', function (Request $request, Response $response, array $a
     //generate semirandom seed based on a hash of current timestamp
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
-    
+
     $task_list = getTaskList($seed);
 
     $data = ['seed' => $seed, 'list' => $task_list];
-    return $response->withJson($data);    
+    return $response->withJson($data);
 });
 
 $app->post('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
@@ -75,14 +75,14 @@ $app->run();
 function getTaskList($seed){
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
-    //retrieve task library and init vars 
+    //retrieve task library and init vars
     $task_library = json_decode(file_get_contents('task_list.json'), true);
     $task_list = [];
     $removed_task_ids = [];
 
     //Initialize RNG
     $rng = new SeedSpring($seed);
-	
+
     $chapter_names = [
         "Forsaken City",
         "Old Site",
@@ -93,14 +93,23 @@ function getTaskList($seed){
         "Summit"
     ];
 
+    $chapters = [1, 2, 3, 4, 5, 6, 7];
+    $chapter_container = [];
     //Get a task for each chapter
-    for($chapter = 1; $chapter <= 7; $chapter++){
+    while (count($chapters) > 0) {
+        //Pick chapters in a random order so that tasks with IDs don't cluster in earlier chapters
+        $index = $rng->getInt(0, count($chapters) - 1);
+        $chapter = $chapters[$index];
+
+        unset($chapters[$index]);
+        $chapters = array_values($chapters);
+
         //Generate possible tasks for the chapter
         $merged_list = array_merge($task_library['general'], $task_library[$chapter]);
 
         //Exclude strawberry-related tasks from chapter 6
         if ($chapter != 6) {
-            $merged_list = array_merge($merged_list,$task_library['strawberry']);
+            $merged_list = array_merge($merged_list, $task_library['strawberry']);
         }
 
         //Replace list weights with accumulated weight values
@@ -133,7 +142,7 @@ function getTaskList($seed){
                 }
             }
 
-            if($rand_task == null){
+            if($rand_task == null) {
                 $rand_task = $merged_list[count($merged_list) - 1];
             }
         } while((array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'], $removed_task_ids)));
@@ -143,8 +152,18 @@ function getTaskList($seed){
             $removed_task_ids[] = $rand_task['task_id'];
         }
 
-        $task_list[$chapter_names[$chapter - 1]] = $rand_task['task_description'];
+        $chapter_container[$chapter - 1] = [
+            'name' => $chapter_names[$chapter - 1],
+            'task' => $rand_task['task_description']
+        ];
     }
-    
+
+    for($i = 0; $i < count($chapter_container); $i++){
+        $chapter_data = $chapter_container[$i];
+        $task_list[$chapter_data['name']] = $chapter_data['task'];
+
+    }
+
+
     return $task_list;
 }
