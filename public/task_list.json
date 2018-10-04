@@ -2,156 +2,156 @@
     "general": [
         {
             "task_id": "cassette",
-            "task_description": "Collect Cassette Tape"
+            "task_key": "CASSETTE_TAPE"
         },
         {
             "task_id": "heart",
-            "task_description": "Collect Crystal Heart"
+            "task_key": "CRYSTAL_HEART"
         }
     ],
     "strawberry": [
         {
             "task_id": "nBerries",
-            "weight": 0.4,
-            "task_description": "Collect 5 strawberries"
+            "weight": 0.6,
+            "task_key": "5_STRAWB"
         },
         {
             "task_id": "nBerries",
-            "weight": 0.4,
-            "task_description": "Collect 10 strawberries"
+            "weight": 0.6,
+            "task_key": "10_STRAWB"
         },
         {
             "task_id": "nBerries",
             "weight": 0.2,
-            "task_description": "Collect all strawberries"
+            "task_key": "ALL_STRAWB"
         },
         {
             "task_id": "winged",
-            "task_description": "Collect a winged strawberry"
+            "weight": 0.6,
+            "task_key": "WINGED_STRAWB"
         },
         {
             "task_id": "chainBerries",
-            "task_description": "Collect 3 strawberries simultaneously"
+            "task_key": "CHAIN_BERRIES"
         }
     ],
     "1": [
         {
             "task_id": "theo",
-            "task_description": "Find and talk to Theo"
+            "task_key": "THEO"
         },
         {
-            "task_description": "Beat 5 rooms without dashing"
+            "task_key": "NO_DASH"
         },
         {
-            "task_description": "Activate no more than 3 traffic blocks"
+            "task_key": "TRAFFIC_BLOCKS"
         }
     ],
     "2": [
         {
             "task_id": "theo",
-            "task_description": "Find and talk to Theo"
+            "task_key": "THEO"
         },
         {
             "task_id": "sequenceBerries",
-            "task_description": "Collect all strawberries in the Intervention sequence"
+            "task_key": "INTERVENTION_STRAWB"
         },
         {
-            "task_description": "Get to the room prior to Intervention cutscene before activating dream blocks"
+            "task_key": "INTERVENTION_DREAM"
         }
     ],
     "3": [
         {
             "weight": 0.5,
-            "task_description": "Find and beat Celeste PICO-8"
+            "task_key": "PICO8"
         },
         {
             "weight": 0.5,
-            "task_description": "Find Celeste PICO-8 and collect 5 berries in it"
+            "task_key": "PICO8_BERRY"
         },
         {
             "task_id": "sequenceBerries",
-            "task_description": "Collect all strawberries in the Presidential Suite sequence"
+            "task_key": "PRESIDENTIAL_STRAWB"
         },
         {
             "weight": 0.2,
-            "task_description": "Complete the Huge Mess sequence boxes first, books last"
+            "task_key": "MESS_BOX_BOOK"
         },
         {
             "weight": 0.2,
-            "task_description": "Complete the Huge Mess sequence books first, boxes last"
+            "task_key": "MESS_BOOK_BOX"
         },
         {
             "weight": 0.2,
-            "task_description": "Complete the Huge Mess sequence books first, laundry last"
+            "task_key": "MESS_BOOK_LAUNDRY"
         },
         {
             "weight": 0.2,
-            "task_description": "Complete the Huge Mess sequence laundry first, boxes last"
+            "task_key": "MESS_LAUNDRY_BOX"
         },
         {
             "weight": 0.2,
-            "task_description": "Complete the Huge Mess sequence laundry first, books last"
+            "task_key": "MESS_LAUNDRY_BOOK"
         }
     ],
     "4": [
         {
-            "task_description": "Bounce off 3 snowballs"
+            "task_key": "SNOWBALL"
         },
         {
-            "task_description": "Take the hidden path to Cliff Face"
+            "task_key": "HIDDEN_PATH"
         }
     ],
     "5": [
         {
             "task_id": "theo",
-            "task_description": "Activate the Theo cutscene in the Search sequence"
+            "task_key": "THEO_CUTSCENE"
         },
         {
             "task_id": "sequenceBerries",
-            "task_description": "Collect the strawberry during the crystal Theo sequence"
+            "task_key": "THEO_STRAWB"
         },
         {
-            "task_description": "Kill a seeker"
+            "task_key": "SEEKER"
         },
         {
-            "task_description": "Collect all 3 keys in Search"
+            "task_key": "3_KEYS"
         },
         {
-            "task_description": "Destroy 5 red blocks using seekers"
+            "task_key": "SEEKER_RED_BLOCKS"
         }
     ],
     "6": [
         {
-            "task_description": "Reach the Towerfall room"
+            "task_key": "TOWERFALL"
         },
         {
-            "task_description": "Hit all 4 sides of a single Kevin Block"
-        },
-        {
-            "weight": 0.5,
-            "task_description": "Collect all feathers in the dream sequence"
+            "task_key": "KEVIN"
         },
         {
             "weight": 0.5,
-            "task_description": "Collect all feathers in the room before Old Lady"
+            "task_key": "FEATHERS_DREAM"
+        },
+        {
+            "weight": 0.5,
+            "task_key": "FEATHERS_LADY"
         }
     ],
 
     "7": [
         {
-            "task_description": "Collect 3 jewels"
+            "task_key": "3_JEWELS"
         },
         {
             "weight": 0.5,
-            "task_description": "Activate all checkpoints in 3000m"
+            "task_key": "3000M_CHECKPOINTS"
         },
         {
             "weight": 0.5,
-            "task_description": "Skip 5 checkpoints in 3000m"
+            "task_key": "3000M_SKIP_5"
         },
         {
-            "task_description": "Take the rightmost path at 1000m"
+            "task_key": "1000M_RIGHT"
         }
     ]
 }
-

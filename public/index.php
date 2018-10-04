@@ -29,8 +29,10 @@ require __DIR__ . '/../src/dependencies.php';
 require __DIR__ . '/../src/middleware.php';
 
 // Register routes
+//require __DIR__ . '/../src/routes.php';
 
 // Run app
+
 
 $app->get('/celeste/', function (Request $request, Response $response, array $args) {
     //Generate semirandom seed based on a hash of current timestamp
@@ -69,14 +71,19 @@ $app->post('/celeste/{seed:\w+}', function (Request $request, Response $response
 });
 
 
+
 $app->run();
 
 //randomization logic -- create task list given seed
 function getTaskList($seed){
+
+    $text_strings = get_text_strings();
+
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
     //retrieve task library and init vars
     $task_library = json_decode(file_get_contents('task_list.json'), true);
+
     $task_list = [];
     $removed_task_ids = [];
 
@@ -152,9 +159,12 @@ function getTaskList($seed){
             $removed_task_ids[] = $rand_task['task_id'];
         }
 
+        $task_key = $rand_task['task_key'];
+        $task_text = $text_strings[$task_key];
+
         $chapter_container[$chapter - 1] = [
             'name' => $chapter_names[$chapter - 1],
-            'task' => $rand_task['task_description']
+            'task' => $task_text
         ];
     }
 
@@ -166,4 +176,15 @@ function getTaskList($seed){
 
 
     return $task_list;
+}
+
+function get_text_strings() {
+    // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
+    return json_decode(file_get_contents('../I18N/en_strings.json'), true);
+}
+
+function print_r2($val){
+    echo '<pre>';
+    print_r($val);
+    echo  '</pre>';
 }
