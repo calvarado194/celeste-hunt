@@ -71,10 +71,10 @@
         </table>
         <!-- This first statement should only take effect in development, when the web url is localhost -->
         <?php if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])): ?>
-            <a style="float: right;margin-top: 10px;" href="http://localhost:8000/celeste/" class="pure-button celeste-font">Reseed</a>
+            <a id="reseed-btn" href="http://localhost:8000/celeste/" class="pure-button celeste-font">Reseed</a>
         <?php else: ?>
             <!-- This second statement is used for production, when hosted anywhere but localhost. -->
-            <a style="float: right;margin-top: 10px;" href="https://oneninefour.cl/celeste/" class="pure-button celeste-font">Reseed</a>
+            <a id="reseed-btn" href="https://oneninefour.cl/celeste/" class="pure-button celeste-font">Reseed</a>
         <?php endif; ?>
         <!-- <select id="lang-select">
             <option value="en" selected>English</option>
