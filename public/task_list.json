@@ -12,12 +12,12 @@
     "strawberry": [
         {
             "task_id": "nBerries",
-            "weight": 0.4,
+            "weight": 0.6,
             "task_description": "Collect 5 strawberries"
         },
         {
             "task_id": "nBerries",
-            "weight": 0.4,
+            "weight": 0.6,
             "task_description": "Collect 10 strawberries"
         },
         {
@@ -27,6 +27,7 @@
         },
         {
             "task_id": "winged",
+            "weight": 0.6,
             "task_description": "Collect a winged strawberry"
         },
         {
