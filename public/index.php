@@ -77,7 +77,8 @@ $app->run();
 //randomization logic -- create task list given seed
 function getTaskList($seed){
 
-    $text_strings = get_text_strings();
+    $language_chosen = "en";
+    $text_strings = get_text_strings($language_chosen);
 
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
@@ -164,7 +165,7 @@ function getTaskList($seed){
 
         $chapter_container[$chapter - 1] = [
             'name' => $chapter_names[$chapter - 1],
-            'task' => $task_text
+            'task' => lookup_string($text_strings, $task_key)
         ];
     }
 
@@ -178,9 +179,17 @@ function getTaskList($seed){
     return $task_list;
 }
 
-function get_text_strings() {
+function get_text_strings($language_chosen) {
     // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
-    return json_decode(file_get_contents('../I18N/en_strings.json'), true);
+    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+}
+
+function lookup_string($string_library, $string_key) {
+    if(array_key_exists($string_key, $string_library)) {
+         return $string_library[$string_key];
+    } else {
+        return "TRANSLATION MISSING: $string_key";
+    }
 }
 
 function print_r2($val){

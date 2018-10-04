@@ -54,50 +54,48 @@
     </head>
     <body>
         <div id="layout">
-            <div id="main">
-                <div class="header">
-                    <h1 class="celeste-font" style="padding-left:16px;">Celeste Hunt</h1>
-                </div>
-                <div class="content">
-                    <div class="pure-g">
-                        <div class="pure-u-1">
-                        <table class="pure-table pure-table-striped" style="width: 100%">
-                            <?php foreach($task_list as $chapter => $task): ?>
-                                <tr>
-                                    <td class="celeste-font chapter-header"><?=$chapter ?></td>
-                                    <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </table>
-                        <a id="reseed-btn" href="http://localhost:8000/index.php/celeste/" class="pure-button celeste-font">Reseed</a>
-                        <!-- <select id="lang-select">
-                            <option value="en" selected>English</option>
-                            <option value="fr">French</option>
-                            <option value="it">Italian</option>
-                            <option value="de">German</option>
-                            <option value="es">Spanish</option>
-                            <option value="ja">Japanese</option>
-                            <option value="ko">Korean</option>
-                            <option value="zh">Chinese(Simplified)</option>
-                        </select> -->
-                        </div>
-                    </div>
-                    <div class="pure-g" style="padding:0 16px;">
-                        <div class="pure-u-1 u-sm-1-2">
-                            <h2 class="celeste-font subhead">What's this?</h2>
-                            <p>Inspired by the <a href="http://www.speedrunslive.com/tools/oot-bingo/" target="_blank">Ocarina of Time Bingo</a>, Celeste Hunt generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.<p>
-                            <p>Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <div class="credits pure-g">
-                        <div class="pure-u-1 u-sm-1-2">
-                            Made with love by <a href="https://twitter.com/this194" target="_blank">Ikuyo</a>, <a href="https://github.com/fahseltc" target="_blank">digdugdiggy</a> and <a href="https://github.com/Programmatic1" target="_blank">Programmatic</a><br>
-                            Source code available <a href="https://github.com/calvarado194/celeste-bingo" target="_blank">here</a> and Licensed under MIT License<br> 
-                            Celeste is owned by Matt Makes Games. Thanks for making this game, guys.
-                        </div>
-                    </div>
+        <div id="main">
+        <div class="header">
+            <h1 class="celeste-font" style="padding-left:16px;">Celeste Hunt</h1>
+        </div>
+        <div class="content">
+        <div class="pure-g">
+        <div class="pure-u-1">
+        <table class="pure-table pure-table-striped" style="width: 100%">
+            <?php foreach($task_list as $chapter => $task): ?>
+                <tr>
+                    <td class="celeste-font chapter-header"><?=$chapter ?></td>
+                    <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <a style="float: right;margin-top: 10px;" href="https://oneninefour.cl/celeste/" class="pure-button celeste-font">Reseed</a>
+        <!-- <select id="lang-select">
+            <option value="en" selected>English</option>
+            <option value="fr">French</option>
+            <option value="it">Italian</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ja">Japanese</option>
+            <option value="ko">Korean</option>
+            <option value="zh">Chinese(Simplified)</option>
+        </select> -->
+        </div>
+        </div>
+        <div class="pure-g" style="padding:0 16px;">
+            <div class="pure-u-1 u-sm-1-2">
+                <h2 class="celeste-font subhead">What's this?</h2>
+                <p>Inspired by the <a href="http://www.speedrunslive.com/tools/oot-bingo/" target="_blank">Ocarina of Time Bingo</a>, Celeste Hunt generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.<p>
+                <p>Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.</p>
+            </div>
+        </div>
+        </div>
+        <div class="footer">
+            <div class="credits pure-g">
+                <div class="pure-u-1 u-sm-1-2">
+                    Made with love by <a href="https://twitter.com/this194" target="_blank">Ikuyo</a>, <a href="https://github.com/fahseltc" target="_blank">digdugdiggy</a> and <a href="https://github.com/Programmatic1" target="_blank">Programmatic</a><br>
+                    Source code available <a href="https://github.com/calvarado194/celeste-bingo" target="_blank">here</a> and Licensed under MIT License<br> 
+                    Celeste is owned by Matt Makes Games. Thanks for making this game, guys.
                 </div>
             </div>
         </div>

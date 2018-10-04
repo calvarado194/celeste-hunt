@@ -29,5 +29,9 @@ Dev environment steps: (debian vm)
 //     }
 // }
 
+and re-add this line:
+require __DIR__ . '/../src/routes.php';
+then it should work.
+
 4. php -S localhost:8000 -t public
 5. open browser to http://localhost:8000/index.php/
