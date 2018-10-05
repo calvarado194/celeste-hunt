@@ -191,7 +191,7 @@ function get_text_strings($language_chosen) {
 }
 
 function get_chapter_names($lang = 'en'){
-    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true)
+    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
 }
 
 function lookup_string($string_library, $string_key) {
