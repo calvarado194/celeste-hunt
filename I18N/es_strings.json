@@ -33,5 +33,20 @@
   "MESS_BOOK_BOX": "Complete the Huge Mess sequence books first, boxes last",
   "MESS_BOOK_LAUNDRY": "Complete the Huge Mess sequence books first, laundry last",
   "MESS_LAUNDRY_BOX": "Complete the Huge Mess sequence laundry first, boxes last",
-  "MESS_LAUNDRY_BOOK": "Complete the Huge Mess sequence laundry first, books last"
+  "MESS_LAUNDRY_BOOK": "Complete the Huge Mess sequence laundry first, books last",
+  "AREA_1_FORSAKEN_CITY": "Ciudad Olvidada",
+  "AREA_2_OLD_SITE": "Ruinas",
+  "AREA_3_CELESTIAL_RESORT": "Celestial Resort",
+  "AREA_4_GOLDEN RIDGE": "Risco Dorado",
+  "AREA_5_MIRROR TEMPLE": "Templo del espejo",
+  "AREA_6_REFLECTION": "Reflexión",
+  "AREA_7_THE SUMMIT": "La cumbre",
+  "AREA_8_CORE": "Núcleo",
+  "WHATS_THIS": "What's this?",
+  "SITE_DESCRIPTION": "Inspired by the <a href='http://www.speedrunslive.com/tools/oot-bingo/' target='_blank'>Ocarina of Time Bingo</a>, Celeste Hunt generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.",
+  "SEED_EXPLANATION": "Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.",
+  "CREDITS_1": "Made with love by <a href='https://twitter.com/this194' target='_blank'>Ikuyo</a>, <a href='https://github.com/fahseltc' target='_blank'>digdugdiggy</a> and <a href='https://github.com/Programmatic1' target='_blank'>Programmatic</a>",
+  "CREDITS_2": "Source code available <a href='https://github.com/calvarado194/celeste-bingo' target='_blank'>here</a> and Licensed under MIT License",
+  "CREDITS_3": "Celeste is owned by Matt Makes Games. Thanks for making this game, guys.",
+  "RESEED_BTN": "Reseed"
 }

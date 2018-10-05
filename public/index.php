@@ -41,7 +41,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
     $lang = $request->getQueryParam('lang');
 
     if($lang == null)
-        return $response->withRedirect('/celeste/'.$seed);
+        return $response->withRedirect('/celeste/'.$seed."?lang='en'");
     
     return $response->withRedirect('/celeste/'.$seed.'?lang='.$lang);
 });
@@ -50,8 +50,8 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
     $seed = $args['seed'];
     $lang = $request->getQueryParam('lang');
 
-    $task_list = getTaskList($seed, $lang);
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
+    list($task_list, $page_text) = getTaskList($seed, $lang);
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text]);
     return $response;
 });
 
@@ -82,29 +82,30 @@ $app->run();
 //randomization logic -- create task list given seed
 function getTaskList($seed, $lang = 'en'){
     if($lang == null){
+        // supported languages:
+        // ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh_hans']
         $lang = 'en';
     }
     $text_strings = get_text_strings($lang);
 
-    $seed = substr(md5('74dPU18G'.$seed),0,16);
-
     //retrieve task library and init vars
     $task_library = json_decode(file_get_contents('task_list.json'), true);
-
     $task_list = [];
     $removed_task_ids = [];
 
     //Initialize RNG
+    $seed = substr(md5('74dPU18G'.$seed),0,16);
     $rng = new SeedSpring($seed);
 
     $chapter_names = [
-        "Forsaken City",
-        "Old Site",
-        "Celestial Resort",
-        "Golden Ridge",
-        "Mirror Temple",
-        "Reflection",
-        "Summit"
+        "AREA_1_FORSAKEN_CITY",
+        "AREA_2_OLD_SITE",
+        "AREA_3_CELESTIAL_RESORT",
+        "AREA_4_GOLDEN RIDGE",
+        "AREA_5_MIRROR TEMPLE",
+        "AREA_6_REFLECTION",
+        "AREA_7_THE SUMMIT",
+        "AREA_8_CORE"
     ];
 
     $chapters = [1, 2, 3, 4, 5, 6, 7];
@@ -167,10 +168,9 @@ function getTaskList($seed, $lang = 'en'){
         }
 
         $task_key = $rand_task['task_key'];
-        $task_text = $text_strings[$task_key];
 
         $chapter_container[$chapter - 1] = [
-            'name' => $chapter_names[$chapter - 1],
+            'name' => lookup_string($text_strings, $chapter_names[$chapter - 1]),
             'task' => lookup_string($text_strings, $task_key)
         ];
     }
@@ -181,20 +181,29 @@ function getTaskList($seed, $lang = 'en'){
 
     }
 
-
-    return $task_list;
+    return array($task_list, load_page_text($text_strings));
 }
 
 function get_text_strings($language_chosen) {
-    // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
     return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
 }
 
-function get_chapter_names($lang = 'en'){
-    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+function load_page_text($string_library) {
+    return [
+        "WHATS_THIS" => $string_library["WHATS_THIS"],
+        "SITE_DESCRIPTION" => $string_library["SITE_DESCRIPTION"],
+        "SEED_EXPLANATION" => $string_library["SEED_EXPLANATION"],
+        "CREDITS_1" => $string_library["CREDITS_1"],
+        "CREDITS_2" => $string_library["CREDITS_2"],
+        "CREDITS_3" => $string_library["CREDITS_3"],
+        "RESEED_BTN" => $string_library["RESEED_BTN"]
+    ];
 }
 
 function lookup_string($string_library, $string_key) {
+    if($string_library == null) {
+        return "STRING LIBRARY MISSING. KEY: $string_key";
+    }
     if(array_key_exists($string_key, $string_library)) {
          return $string_library[$string_key];
     } else {
