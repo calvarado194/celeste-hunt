@@ -7,7 +7,26 @@ Powered by [Slim](https://www.slimframework.com/) and [SeedSpring](https://githu
 
 ## API Endpoint
 
-An API endpoint is in development, which will allow to fetch this same information as a JSON Object via a POST request, in case you want to do something fancy with it. It will be documented and announced once it's deployed.
+An API endpoint is available if you wish to obtain data and embed it in your own website/app/stream layout.
+
+Calling the URL `https://oneninefour.cl/celeste/` via a POST request will return a JSON with the following format:
+
+```javascript
+{
+    "seed":"fc56b42f3835b662",
+    "list":{
+        "Forsaken City":"Collect 5 strawberries",
+        "Old Site":"Collect Crystal Heart",
+        "Celestial Resort":"Collect a winged strawberry",
+        "Golden Ridge":"Take the hidden path to Cliff Face",
+        "Mirror Temple":"Kill a seeker",
+        "Reflection":"Collect Cassette Tape",
+        "Summit":"Take the rightmost path at 1000m"
+    }
+}
+```
+
+You can later call it again passing the seed as part of the URL (ex: `https://oneninefour.cl/celeste/fc56b42f3835b662`)
 
 ## License
 

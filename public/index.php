@@ -29,23 +29,72 @@ require __DIR__ . '/../src/dependencies.php';
 require __DIR__ . '/../src/middleware.php';
 
 // Register routes
+//require __DIR__ . '/../src/routes.php';
 
 // Run app
 
+
 $app->get('/celeste/', function (Request $request, Response $response, array $args) {
+    //Generate semirandom seed based on a hash of current timestamp
+    $date = date('YmdHis');
+    $seed = substr(md5($date), 0, 16);
+    $lang = $request->getQueryParam('lang');
+
+    if($lang == null)
+        return $response->withRedirect('/celeste/'.$seed);
+    
+    return $response->withRedirect('/celeste/'.$seed.'?lang='.$lang);
+});
+
+$app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
+    $seed = $args['seed'];
+    $lang = $request->getQueryParam('lang');
+
+    $task_list = getTaskList($seed, $lang);
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
+    return $response;
+});
+
+//API methods
+$app->post('/celeste/', function (Request $request, Response $response, array $args) {
+    //generate semirandom seed based on a hash of current timestamp
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
 
-    return $response->withRedirect('/celeste/'.$seed);
+    $task_list = getTaskList($seed);
+
+    $data = ['seed' => $seed, 'list' => $task_list];
+    return $response->withJson($data);
 });
-$app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
+
+$app->post('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
+    $task_list = getTaskList($seed);
+
+    $data = ['seed' => $seed, 'list' => $task_list];
+    return $response->withJson($data);
+});
+
+
+
+$app->run();
+
+//randomization logic -- create task list given seed
+function getTaskList($seed, $lang = 'en'){
+    if($lang == null){
+        $lang = 'en';
+    }
+    $text_strings = get_text_strings($lang);
+
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
+    //retrieve task library and init vars
     $task_library = json_decode(file_get_contents('task_list.json'), true);
+
     $task_list = [];
     $removed_task_ids = [];
 
+    //Initialize RNG
     $rng = new SeedSpring($seed);
 
     $chapter_names = [
@@ -58,30 +107,103 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
         "Summit"
     ];
 
-    for($chapter = 1;$chapter <=7; $chapter++){
-        $merged_list = array_merge($task_library['general'],$task_library[$chapter]);
+    $chapters = [1, 2, 3, 4, 5, 6, 7];
+    $chapter_container = [];
+    //Get a task for each chapter
+    while (count($chapters) > 0) {
+        //Pick chapters in a random order so that tasks with IDs don't cluster in earlier chapters
+        $index = $rng->getInt(0, count($chapters) - 1);
+        $chapter = $chapters[$index];
 
-        //exclude strawberry-related tasks from chapter 6
-        if($chapter == 6){
-            foreach($merged_list as $key => $task){
-                if(array_key_exists('strawb',$task)){
-                    unset($merged_list[$key]);
+        unset($chapters[$index]);
+        $chapters = array_values($chapters);
+
+        //Generate possible tasks for the chapter
+        $merged_list = array_merge($task_library['general'], $task_library[$chapter]);
+
+        //Exclude strawberry-related tasks from chapter 6
+        if ($chapter != 6) {
+            $merged_list = array_merge($merged_list, $task_library['strawberry']);
+        }
+
+        //Replace list weights with accumulated weight values
+        $sum = 0;
+
+        for ($i = 0; $i < count($merged_list); $i++) {
+            $item = $merged_list[$i];
+
+            if (array_key_exists('weight',$item)) {
+                $temp = $item['weight'];
+            }
+            //Use default weight of 1 if not specified
+            else {
+                $temp = 1;
+            }
+
+            $sum += $temp;
+            $merged_list[$i]['weight'] = $sum;
+        }
+
+        //Obtain a task, avoiding repeating ones
+        do {
+            $rand = $sum * ($rng->getInt(0, 65536) / 65536);
+            $rand_task = null;
+
+            for($i = 0; $i < count($merged_list); $i++) {
+                if($rand <= $merged_list[$i]['weight']) {
+                    $rand_task = $merged_list[$i];
+                    break;
                 }
             }
 
-            $merged_list = array_values($merged_list);
+            if($rand_task == null) {
+                $rand_task = $merged_list[count($merged_list) - 1];
+            }
+        } while((array_key_exists('task_id', $rand_task) && in_array($rand_task['task_id'], $removed_task_ids)));
+
+        //Add task ID to used list, if present
+        if (array_key_exists('task_id', $rand_task)) {
+            $removed_task_ids[] = $rand_task['task_id'];
         }
 
-	do{
-            $rand_task = $merged_list[$rng->getInt(0, count($merged_list) -1)];
-        }while(in_array($rand_task['task_id'],$removed_task_ids) || $rand_task == null);
+        $task_key = $rand_task['task_key'];
+        $task_text = $text_strings[$task_key];
 
-        $removed_task_ids[] = $rand_task['task_id'];
-        $task_list[$chapter_names[$chapter -1]] = $rand_task['task_description'];
+        $chapter_container[$chapter - 1] = [
+            'name' => $chapter_names[$chapter - 1],
+            'task' => lookup_string($text_strings, $task_key)
+        ];
     }
 
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
-    return $response;
-});
+    for($i = 0; $i < count($chapter_container); $i++){
+        $chapter_data = $chapter_container[$i];
+        $task_list[$chapter_data['name']] = $chapter_data['task'];
 
-$app->run();
+    }
+
+
+    return $task_list;
+}
+
+function get_text_strings($language_chosen) {
+    // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
+    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+}
+
+function get_chapter_names($lang = 'en'){
+    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+}
+
+function lookup_string($string_library, $string_key) {
+    if(array_key_exists($string_key, $string_library)) {
+         return $string_library[$string_key];
+    } else {
+        return "TRANSLATION MISSING: $string_key";
+    }
+}
+
+function print_r2($val){
+    echo '<pre>';
+    print_r($val);
+    echo  '</pre>';
+}
