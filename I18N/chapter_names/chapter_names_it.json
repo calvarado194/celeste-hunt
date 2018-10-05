@@ -1,5 +1,4 @@
 {
-	"AREA_0": "Prologo",
 	"AREA_1": "Città abbandonata",
 	"AREA_2": "Antiche rovine",
 	"AREA_3": "Albergo Celestiale",
@@ -7,6 +6,5 @@
 	"AREA_5": "Tempio degli specchi",
 	"AREA_6": "Riflettere",
 	"AREA_7": "La vetta",
-	"AREA_8": "Epilogo",
-	"AREA_9": "Nucleo"
+	"AREA_8": "Nucleo"
 }

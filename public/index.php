@@ -97,15 +97,7 @@ function getTaskList($seed, $lang = 'en'){
     //Initialize RNG
     $rng = new SeedSpring($seed);
 
-    $chapter_names = [
-        "Forsaken City",
-        "Old Site",
-        "Celestial Resort",
-        "Golden Ridge",
-        "Mirror Temple",
-        "Reflection",
-        "Summit"
-    ];
+    $chapter_names = get_chapter_names($lang);
 
     $chapters = [1, 2, 3, 4, 5, 6, 7];
     $chapter_container = [];
@@ -191,7 +183,14 @@ function get_text_strings($language_chosen) {
 }
 
 function get_chapter_names($lang = 'en'){
-    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+    $data = json_decode(file_get_contents("../I18N/chapter_names/chapter_names_{$lang}.json"), true);
+    $names = [];
+    
+    for($i = 0; $i < 8; $i++){
+        $names[$i] = $data["AREA_".($i + 1)];
+    }
+
+    return $names;
 }
 
 function lookup_string($string_library, $string_key) {

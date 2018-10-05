@@ -1,5 +1,4 @@
 {
-	"AREA_0": "Prologue",
 	"AREA_1": "La cité abandonnée",
 	"AREA_2": "Le site ancien",
 	"AREA_3": "La station Celeste",
@@ -7,6 +6,5 @@
 	"AREA_5": "Le temple miroir",
 	"AREA_6": "Réflexion",
 	"AREA_7": "Le sommet",
-	"AREA_8": "Épilogue",
-	"AREA_9": "Le cœur"
+	"AREA_8": "Le cœur"
 }
