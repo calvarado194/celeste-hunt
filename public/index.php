@@ -31,8 +31,6 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 //require __DIR__ . '/../src/routes.php';
 
-// Run app
-
 
 $app->get('/celeste/', function (Request $request, Response $response, array $args) {
     //Generate semirandom seed based on a hash of current timestamp
@@ -41,7 +39,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
     $lang = $request->getQueryParam('lang');
 
     if($lang == null)
-        return $response->withRedirect('/celeste/'.$seed."?lang='en'");
+        return $response->withRedirect('/celeste/'.$seed);
     
     return $response->withRedirect('/celeste/'.$seed.'?lang='.$lang);
 });
@@ -181,23 +179,11 @@ function getTaskList($seed, $lang = 'en'){
 
     }
 
-    return array($task_list, load_page_text($text_strings));
+    return array($task_list, $text_strings);
 }
 
 function get_text_strings($language_chosen) {
     return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
-}
-
-function load_page_text($string_library) {
-    return [
-        "WHATS_THIS" => $string_library["WHATS_THIS"],
-        "SITE_DESCRIPTION" => $string_library["SITE_DESCRIPTION"],
-        "SEED_EXPLANATION" => $string_library["SEED_EXPLANATION"],
-        "CREDITS_1" => $string_library["CREDITS_1"],
-        "CREDITS_2" => $string_library["CREDITS_2"],
-        "CREDITS_3" => $string_library["CREDITS_3"],
-        "RESEED_BTN" => $string_library["RESEED_BTN"]
-    ];
 }
 
 function lookup_string($string_library, $string_key) {
