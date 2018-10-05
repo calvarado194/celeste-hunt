@@ -38,14 +38,19 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
     //Generate semirandom seed based on a hash of current timestamp
     $date = date('YmdHis');
     $seed = substr(md5($date), 0, 16);
+    $lang = $request->getQueryParam('lang');
 
-    return $response->withRedirect('/celeste/'.$seed);
+    if($lang == null)
+        return $response->withRedirect('/celeste/'.$seed);
+    
+    return $response->withRedirect('/celeste/'.$seed.'?lang='.$lang);
 });
 
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
+    $lang = $request->getQueryParam('lang');
 
-    $task_list = getTaskList($seed);
+    $task_list = getTaskList($seed, $lang);
     $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
     return $response;
 });
@@ -75,10 +80,11 @@ $app->post('/celeste/{seed:\w+}', function (Request $request, Response $response
 $app->run();
 
 //randomization logic -- create task list given seed
-function getTaskList($seed){
-
-    $language_chosen = "en";
-    $text_strings = get_text_strings($language_chosen);
+function getTaskList($seed, $lang = 'en'){
+    if($lang == null){
+        $lang = 'en';
+    }
+    $text_strings = get_text_strings($lang);
 
     $seed = substr(md5('74dPU18G'.$seed),0,16);
 
@@ -182,6 +188,10 @@ function getTaskList($seed){
 function get_text_strings($language_chosen) {
     // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
     return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+}
+
+function get_chapter_names($lang = 'en'){
+    return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true)
 }
 
 function lookup_string($string_library, $string_key) {
