@@ -1,78 +1,95 @@
 {
     "general": [
+        //Collect Cassette Tape
         {
             "task_id": "cassette",
             "task_key": "CASSETTE_TAPE"
         },
+        //Collect Crystal Heart
         {
             "task_id": "heart",
             "task_key": "CRYSTAL_HEART"
         }
     ],
     "strawberry": [
+        //Collect 5 strawberries
         {
             "task_id": "nBerries",
             "weight": 0.6,
             "task_key": "5_STRAWB"
         },
+        //Collect 10 strawberries
         {
             "task_id": "nBerries",
             "weight": 0.6,
             "task_key": "10_STRAWB"
         },
+        //Collect all strawberries
         {
             "task_id": "nBerries",
             "weight": 0.2,
             "task_key": "ALL_STRAWB"
         },
+        //Collect a winged strawberry
         {
             "task_id": "winged",
             "weight": 0.6,
             "task_key": "WINGED_STRAWB"
         },
+        //Collect 3 strawberries simultaneously
         {
             "task_id": "chainBerries",
             "task_key": "CHAIN_BERRIES"
         }
     ],
     "1": [
+        //Find and talk to Theo
         {
             "task_id": "theo",
             "task_key": "THEO"
         },
+        //Beat 5 rooms without dashing
         {
             "task_key": "NO_DASH"
         },
+        //Activate no more than 3 traffice blocks
         {
             "task_key": "TRAFFIC_BLOCKS"
         }
     ],
     "2": [
+        //Find and talk to Theo
         {
             "task_id": "theo",
             "task_key": "THEO"
         },
+        //Collect all strawberries in the Intervention sequence
         {
             "task_id": "sequenceBerries",
             "task_key": "INTERVENTION_STRAWB"
         },
+        //Get to the room prior to the Intervention cutscene before activating dream blocks
         {
             "task_key": "INTERVENTION_DREAM"
         }
     ],
     "3": [
+        //Find and beat Celeste PICO-8
         {
             "weight": 0.5,
             "task_key": "PICO8"
         },
+        //Find Celeste PICO-8 and collect 5 berries in it
         {
             "weight": 0.5,
             "task_key": "PICO8_BERRY"
         },
+        //Collect all strawberries in the Presidential Suite sequence
         {
             "task_id": "sequenceBerries",
             "task_key": "PRESIDENTIAL_STRAWB"
         },
+        //Complete the huge mess sequence in alternative orders
         {
             "weight": 0.2,
             "task_key": "MESS_BOX_BOOK"
@@ -95,43 +112,54 @@
         }
     ],
     "4": [
+        //Bounce off 3 snowballs
         {
             "task_key": "SNOWBALL"
         },
+        //Take the hidden path to Cliff Face
         {
             "task_key": "HIDDEN_PATH"
         }
     ],
     "5": [
+        //Activate the Theo cutscene in the Search sequence
         {
             "task_id": "theo",
             "task_key": "THEO_CUTSCENE"
         },
+        //Collect the strawberry during the crystal Theo sequence
         {
             "task_id": "sequenceBerries",
             "task_key": "THEO_STRAWB"
         },
+        //Kill a seeker
         {
             "task_key": "SEEKER"
         },
+        //Collect all 3 keys in Search
         {
             "task_key": "3_KEYS"
         },
+        //Destroy 5 red blocks using seekers
         {
             "task_key": "SEEKER_RED_BLOCKS"
         }
     ],
     "6": [
+        //Reach the Towerfall roon
         {
             "task_key": "TOWERFALL"
         },
+        //Hit all 4 sides of a single Kevin block
         {
             "task_key": "KEVIN"
         },
+        //Collect all feathers in the dream sequence
         {
             "weight": 0.5,
             "task_key": "FEATHERS_DREAM"
         },
+        //Collect all feathers in the room 2 rooms before Old Lady
         {
             "weight": 0.5,
             "task_key": "FEATHERS_LADY"
@@ -139,17 +167,21 @@
     ],
 
     "7": [
+        //Collect 3 jewels
         {
             "task_key": "3_JEWELS"
         },
+        //Activate all checkpoints in 0300m
         {
             "weight": 0.5,
             "task_key": "3000M_CHECKPOINTS"
         },
+        //Skip 5 checkpoints in 3000m
         {
             "weight": 0.5,
             "task_key": "3000M_SKIP_5"
         },
+        //Take the rightmost path at 1000m
         {
             "task_key": "1000M_RIGHT"
         }
