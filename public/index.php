@@ -3,6 +3,10 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \ParagonIE\SeedSpring\SeedSpring;
 use \Slim\Views\PhpRenderer;
+use \Dflydev\FigCookies\FigRequestCookies;
+use \Dflydev\FigCookies\FigResponseCookies;
+use Dflydev\FigCookies\Modifier\SameSite;
+use Dflydev\FigCookies\SetCookie;
 
 if (PHP_SAPI == 'cli-server') {
     // To help the built-in PHP dev server, check if the request was actually for
@@ -36,20 +40,40 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
     //Generate semirandom seed based on a hash of current timestamp
     $date = date('YmdHis');
     $seed = substr(md5($date), 0, 16);
-    $lang = $request->getQueryParam('lang');
+    $lang = FigRequestCookies::get($request, 'lang');
 
-    if($lang == null)
-        return $response->withRedirect('/celeste/'.$seed);
-    
-    return $response->withRedirect('/celeste/'.$seed.'?lang='.$lang);
+    if($lang->getValue() == null){
+        $response = FigResponseCookies::set($response, SetCookie::create('lang')
+           ->withValue('en')
+           ->withMaxAge(500)
+           ->rememberForever()
+           ->withPath('/celeste')
+           ->withDomain('.oneninefour.cl')
+           ->withSecure(true)
+           ->withHttpOnly(true));
+    }
+
+    return $response->withRedirect('/celeste/'.$seed);
 });
 
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
-    $lang = $request->getQueryParam('lang');
+    $lang = FigRequestCookies::get($request, 'lang');
+    if($lang->getValue() == null){
+        $response = FigResponseCookies::set($response, SetCookie::create('lang')
+           ->withValue('en')
+           ->withMaxAge(500)
+           ->rememberForever()
+           ->withPath('/celeste')
+           ->withDomain('.oneninefour.cl')
+           ->withSecure(true)
+           ->withHttpOnly(true));
+    }
 
-    list($task_list, $page_text) = getTaskList($seed, $lang);
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text]);
+    list($task_list, $page_text) = getTaskList($seed, $lang->getValue());
+
+    $lang_options = ['en' => 'English', 'es' => 'Español'];
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text['WEBSITE'], 'lang' => $lang->getValue(), 'lang_options' => $lang_options]);
     return $response;
 });
 
@@ -80,8 +104,6 @@ $app->run();
 //randomization logic -- create task list given seed
 function getTaskList($seed, $lang = 'en'){
     if($lang == null){
-        // supported languages:
-        // ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh_hans']
         $lang = 'en';
     }
     $text_strings = get_text_strings($lang);
@@ -94,8 +116,6 @@ function getTaskList($seed, $lang = 'en'){
     //Initialize RNG
     $seed = substr(md5('74dPU18G'.$seed),0,16);
     $rng = new SeedSpring($seed);
-
-    $chapter_names = get_chapter_names($lang);
 
     $chapters = [1, 2, 3, 4, 5, 6, 7];
     $chapter_container = [];
@@ -159,8 +179,8 @@ function getTaskList($seed, $lang = 'en'){
         $task_key = $rand_task['task_key'];
 
         $chapter_container[$chapter - 1] = [
-            'name' => lookup_string($text_strings, $chapter_names[$chapter - 1]),
-            'task' => lookup_string($text_strings, $task_key)
+            'name' => lookup_string($text_strings['CHAPTERS'], "AREA_$chapter"),
+            'task' => lookup_string($text_strings['TASKS'], $task_key)
         ];
     }
 
@@ -173,13 +193,14 @@ function getTaskList($seed, $lang = 'en'){
     return array($task_list, $text_strings);
 }
 
-function get_text_strings($language_chosen) {
+function get_text_strings($language_chosen = 'en') {
     // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
     return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
 }
 
 function get_chapter_names($lang = 'en'){
     $data = json_decode(file_get_contents("../I18N/chapter_names/chapter_names_{$lang}.json"), true);
+    $data = $data['chapters'];
     $names = [];
     
     for($i = 0; $i < 8; $i++){

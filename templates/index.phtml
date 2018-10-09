@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
     <style>
             @font-face {
                 font-family: Renogare;
@@ -33,7 +34,6 @@
                 font-family: 'Renogare', Arial, sans-serif;
             }
             .subhead{
-                margin-top: 1em;
                 color: #888;
             }
             @media only screen and (min-width:768px){
@@ -49,6 +49,47 @@
                 float: right;
                 margin-top: 10px;
                 margin-right: 10px;
+            }
+            .trigger-container{
+                margin: 10px 5px;
+                padding: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .trigger{
+                width: 100%;
+                display: inline-block;
+            }
+            .trigger input[type="checkbox"]{
+                opacity: 0;
+            }
+            .trigger input[type="checkbox"] + span {
+                display: none;
+                opacity: 0;
+                transition: display 0s linear 0.33s, opacity 0.33s linear;
+            }
+            #seal:after {
+                content: '\02795'; /* Unicode character for "plus" sign (+) */
+                font-size: 13px;
+                color: #777;
+                float: left;
+                margin-left: 5px;
+            }
+
+            .trigger input[type="checkbox"]:checked + span {
+                display:inline-block;
+                opacity: 1;
+
+            transition-delay: 0s;
+            }
+
+            .msg {
+                display: inline-block;
+                width: 100%;
+                margin-top: 8px;
+                padding: 8px 12px;
+                border: 0px;
+                border-radius: 3px;
             }
         </style>
     </head>
@@ -69,23 +110,53 @@
                 </tr>
             <?php endforeach; ?>
         </table>
-        <!-- This first statement should only take effect in development, when the web url is localhost -->
+        </div>
+        </div>
+        <div class="pure-g">
+        <div class="pure-u-3-4">
+            <div class="trigger-container">
+            <label class="trigger">
+                <span id="seal"></span> <input type="checkbox" class="checkbox"> Options
+                <span class="msg">
+                    <form class="pure-form pure-form-stacked" id="seed-options">
+                        <fieldset>
+                            <label for="no-pico" class="pure-checkbox">
+                                <input style="opacity:1" id="no-pico" type="checkbox"> Exclude PICO-8 tasks
+                            </label>
+                            <label for="no-berries" class="pure-checkbox">
+                                <input style="opacity:1" id="no-berries" type="checkbox"> Exclude strawberry-related tasks
+                            </label>
+                            <label for="cheat" class="pure-checkbox">
+                                <input style="opacity:1" id="cheat" type="checkbox"> Enable any% cheat mode
+                            </label>
+                        </fieldset>
+                    </form>
+                </span>
+            </label>
+            </div>
+        </div>
+        <div class="pure-u-1-4">
+
+        <!-- first statement should only take effect in development, when the web url is localhost -->
         <?php if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])): ?>
             <a id="reseed-btn" href="http://localhost:8000/celeste/" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
         <?php else: ?>
             <!-- This second statement is used for production, when hosted anywhere but localhost. -->
-            <a id="reseed-btn" href="http://dev.oneninefour.cl/celeste/" class="pure-button celeste-font">Reseed</a>
+            <a id="reseed-btn" href="http://dev.oneninefour.cl/celeste/" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
         <?php endif; ?>
-        <!-- <select id="lang-select">
-            <option value="en" selected>English</option>
-            <option value="fr">French</option>
-            <option value="it">Italian</option>
-            <option value="de">German</option>
-            <option value="es">Spanish</option>
-            <option value="ja">Japanese</option>
-            <option value="ko">Korean</option>
-            <option value="zh">Chinese(Simplified)</option>
-        </select> -->
+        <form class="pure-form pure-form-stacked">
+            <fieldset> 
+                <select id="lang-select" style="margin-right:0px">
+                    <?php foreach($lang_options as $key => $value): ?>
+                        <?php if ($lang == $key): ?>
+                            <option value="<?=$key ?>" selected><?=$value ?></option>
+                        <?php else: ?>
+                            <option value="<?=$key ?>"><?=$value ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </fieldset>
+        </form>
         </div>
         </div>
         <div class="pure-g" style="padding:0 16px;">
@@ -108,5 +179,14 @@
         </div>
         </div>
         </div>
+        <script type="text/javascript">
+            var lang_select = document.getElementById("lang-select");
+
+            lang_select.addEventListener("change", function() {
+                setCookie("lang", lang_select.value, 500);
+                window.location.reload();
+            });
+        </script>
+
     </body>
 </html>
