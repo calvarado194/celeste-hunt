@@ -58,7 +58,11 @@
         },
         {
             "task_description": "Get to the room prior to Intervention cutscene before activating dream blocks"
+        },
+        {
+            "task_description": "Read the poem in Awake"
         }
+
     ],
     "3": [
         {
