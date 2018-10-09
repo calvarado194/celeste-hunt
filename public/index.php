@@ -31,8 +31,6 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 //require __DIR__ . '/../src/routes.php';
 
-// Run app
-
 
 $app->get('/celeste/', function (Request $request, Response $response, array $args) {
     //Generate semirandom seed based on a hash of current timestamp
@@ -50,8 +48,8 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
     $seed = $args['seed'];
     $lang = $request->getQueryParam('lang');
 
-    $task_list = getTaskList($seed, $lang);
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list]);
+    list($task_list, $page_text) = getTaskList($seed, $lang);
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text]);
     return $response;
 });
 
@@ -82,19 +80,19 @@ $app->run();
 //randomization logic -- create task list given seed
 function getTaskList($seed, $lang = 'en'){
     if($lang == null){
+        // supported languages:
+        // ['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh_hans']
         $lang = 'en';
     }
     $text_strings = get_text_strings($lang);
 
-    $seed = substr(md5('74dPU18G'.$seed),0,16);
-
     //retrieve task library and init vars
     $task_library = json_decode(file_get_contents('task_list.json'), true);
-
     $task_list = [];
     $removed_task_ids = [];
 
     //Initialize RNG
+    $seed = substr(md5('74dPU18G'.$seed),0,16);
     $rng = new SeedSpring($seed);
 
     $chapter_names = get_chapter_names($lang);
@@ -159,10 +157,9 @@ function getTaskList($seed, $lang = 'en'){
         }
 
         $task_key = $rand_task['task_key'];
-        $task_text = $text_strings[$task_key];
 
         $chapter_container[$chapter - 1] = [
-            'name' => $chapter_names[$chapter - 1],
+            'name' => lookup_string($text_strings, $chapter_names[$chapter - 1]),
             'task' => lookup_string($text_strings, $task_key)
         ];
     }
@@ -173,8 +170,7 @@ function getTaskList($seed, $lang = 'en'){
 
     }
 
-
-    return $task_list;
+    return array($task_list, $text_strings);
 }
 
 function get_text_strings($language_chosen) {
@@ -194,6 +190,9 @@ function get_chapter_names($lang = 'en'){
 }
 
 function lookup_string($string_library, $string_key) {
+    if($string_library == null) {
+        return "STRING LIBRARY MISSING. KEY: $string_key";
+    }
     if(array_key_exists($string_key, $string_library)) {
          return $string_library[$string_key];
     } else {
