@@ -95,16 +95,7 @@ function getTaskList($seed, $lang = 'en'){
     $seed = substr(md5('74dPU18G'.$seed),0,16);
     $rng = new SeedSpring($seed);
 
-    $chapter_names = [
-        "AREA_1_FORSAKEN_CITY",
-        "AREA_2_OLD_SITE",
-        "AREA_3_CELESTIAL_RESORT",
-        "AREA_4_GOLDEN RIDGE",
-        "AREA_5_MIRROR TEMPLE",
-        "AREA_6_REFLECTION",
-        "AREA_7_THE SUMMIT",
-        "AREA_8_CORE"
-    ];
+    $chapter_names = get_chapter_names($lang);
 
     $chapters = [1, 2, 3, 4, 5, 6, 7];
     $chapter_container = [];
@@ -183,7 +174,19 @@ function getTaskList($seed, $lang = 'en'){
 }
 
 function get_text_strings($language_chosen) {
+    // TODO add code that gets some value of a <select> from the post params and uses that to load the correct language file. Right now its just english
     return json_decode(file_get_contents("../I18N/{$language_chosen}_strings.json"), true);
+}
+
+function get_chapter_names($lang = 'en'){
+    $data = json_decode(file_get_contents("../I18N/chapter_names/chapter_names_{$lang}.json"), true);
+    $names = [];
+    
+    for($i = 0; $i < 8; $i++){
+        $names[$i] = $data["AREA_".($i + 1)];
+    }
+
+    return $names;
 }
 
 function lookup_string($string_library, $string_key) {
