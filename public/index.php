@@ -53,7 +53,9 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
            ->withHttpOnly(true));
     }
 
-    return $response->withRedirect('/celeste/'.$seed);
+    $flags = $request->getQueryParam('flags');
+
+    return $response->withRedirect('/celeste/'.$seed.(($flags != null)? '?flags='.$flags:''));
 });
 
 $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
@@ -70,10 +72,17 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
            ->withHttpOnly(true));
     }
 
-    list($task_list, $page_text) = getTaskList($seed, $lang->getValue());
+    $flags = $request->getQueryParam('flags');
+    list($task_list, $page_text) = getTaskList($seed, $lang->getValue(), $flags);
+
+    if($flags == null){
+        $flags = [];
+    }
+
+    $flags = str_split($flags);
 
     $lang_options = ['en' => 'English', 'es' => 'Español'];
-    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text['WEBSITE'], 'lang' => $lang->getValue(), 'lang_options' => $lang_options]);
+    $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text['WEBSITE'], 'lang' => $lang->getValue(), 'lang_options' => $lang_options, 'flags' => $flags]);
     return $response;
 });
 
@@ -102,14 +111,19 @@ $app->post('/celeste/{seed:\w+}', function (Request $request, Response $response
 $app->run();
 
 //randomization logic -- create task list given seed
-function getTaskList($seed, $lang = 'en'){
+function getTaskList($seed, $lang = 'en', $flags = ''){
     if($lang == null){
         $lang = 'en';
     }
     $text_strings = get_text_strings($lang);
 
     //retrieve task library and init vars
-    $task_library = json_decode(file_get_contents('task_list.json'), true);
+    if($flags == null){
+        $flags = '';
+    }
+
+    $flags = str_split($flags);
+    $task_library = getTaskLibrary($flags);
     $task_list = [];
     $removed_task_ids = [];
 
@@ -219,6 +233,25 @@ function lookup_string($string_library, $string_key) {
     } else {
         return "TRANSLATION MISSING: $string_key";
     }
+}
+
+function getTaskLibrary($flags = []){
+    $task_library = json_decode(file_get_contents('task_list.json'), true);
+    //remove tasks given flags
+    foreach($task_library as $category => $task_list){
+        foreach($task_list as $key => $task){
+            if(array_key_exists('flags', $task) && $task['flags'] != []){
+                foreach($task['flags'] as $flag){
+                    if(in_array($flag, $flags)){
+                        unset($task_library[$category][$key]);
+                    }
+                }
+            }
+        }
+        $task_library[$category] = array_values($task_library[$category]);
+    }
+
+    return $task_library;
 }
 
 function print_r2($val){

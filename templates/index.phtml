@@ -121,13 +121,13 @@
                     <form class="pure-form pure-form-stacked" id="seed-options">
                         <fieldset>
                             <label for="no-pico" class="pure-checkbox">
-                                <input style="opacity:1" id="no-pico" type="checkbox"> Exclude PICO-8 tasks
+                                <input class="flag-select" style="opacity:1" value="p" id="p" type="checkbox" <?php if(in_array('p',$flags)): echo 'checked'; endif; ?>> Exclude PICO-8 tasks
                             </label>
                             <label for="no-berries" class="pure-checkbox">
-                                <input style="opacity:1" id="no-berries" type="checkbox"> Exclude strawberry-related tasks
+                                <input class="flag-select" style="opacity:1" value="s" id="s" type="checkbox" <?php if(in_array('s',$flags)): echo 'checked'; endif; ?>> Exclude strawberry-related tasks
                             </label>
                             <label for="cheat" class="pure-checkbox">
-                                <input style="opacity:1" id="cheat" type="checkbox"> Enable any% cheat mode
+                                <input class="flag-select" style="opacity:1" value="c" id="c" type="checkbox" <?php if(in_array('c',$flags)): echo 'checked'; endif; ?>> Enable any% cheat mode
                             </label>
                         </fieldset>
                     </form>
@@ -139,10 +139,10 @@
 
         <!-- first statement should only take effect in development, when the web url is localhost -->
         <?php if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])): ?>
-            <a id="reseed-btn" href="http://localhost:8000/celeste/" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
+            <a id="reseed-btn" href="http://localhost:8000/celeste/?flags=<?php echo implode($flags) ?>" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
         <?php else: ?>
             <!-- This second statement is used for production, when hosted anywhere but localhost. -->
-            <a id="reseed-btn" href="http://dev.oneninefour.cl/celeste/" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
+            <a id="reseed-btn" href="http://dev.oneninefour.cl/celeste/?flags=<?php echo implode($flags) ?>" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
         <?php endif; ?>
         <form class="pure-form pure-form-stacked">
             <fieldset> 
@@ -186,6 +186,29 @@
                 setCookie("lang", lang_select.value, 500);
                 window.location.reload();
             });
+
+            function setFlags(){
+                var flag_checks = document.getElementsByClassName('flag-select');
+                var flags = '';
+
+                for(var i = 0; i < flag_checks.length; i++){
+                    if(flag_checks[i].checked){
+                        flags = flags + flag_checks[i].value;
+                    }
+                }
+
+                if(flags == ''){
+                    document.getElementById('reseed-btn').href = "http://dev.oneninefour.cl/celeste/";
+                }
+                else{
+                    document.getElementById('reseed-btn').href = "http://dev.oneninefour.cl/celeste/?flags=" + flags;
+                }
+            }
+            
+            var flag_checks = document.getElementsByClassName('flag-select');
+            for(var i = 0; i < flag_checks.length; i++){
+                flag_checks[i].addEventListener('change', setFlags);
+            }
         </script>
 
     </body>
