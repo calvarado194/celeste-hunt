@@ -3,17 +3,27 @@
     <head>
         <meta charset="utf-8"/>
         <title>Celeste Hunt</title>
+        <meta name="description" content="A seeded task generator for your Celeste speedruns!" />
+        <meta property="og:title" content="Celeste Hunt" />
+        <meta property="og:description" content="A seeded task generator for your Celeste speedruns!" />
+        <meta property="og:image" content="/celeste/public/test-preview.png" />
         <link rel="shortcut icon" href="/celeste/public/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/celeste/public/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+        <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+<!--<![endif]-->
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
     <style>
             @font-face {
                 font-family: Renogare;
-                src: url("public/Renogare-Regular.otf") format("opentype");
+                src: url("public/Renogare-Regular.woff") format("opentype");
             }
 
             body{
@@ -113,7 +123,7 @@
         </div>
         </div>
         <div class="pure-g">
-        <div class="pure-u-3-4">
+        <div class="pure-u-1 pure-u-sm-3-4">
             <div class="trigger-container">
             <label class="trigger">
                 <span id="seal"></span> <input type="checkbox" class="checkbox"> Options
@@ -135,7 +145,7 @@
             </label>
             </div>
         </div>
-        <div class="pure-u-1-4">
+        <div class="pure-u-1 pure-u-sm-1-4">
 
         <!-- first statement should only take effect in development, when the web url is localhost -->
         <?php if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])): ?>
