@@ -92,17 +92,81 @@ $app->post('/celeste/', function (Request $request, Response $response, array $a
     $date = date('YmdHis');
     $seed = substr(md5($date),0,16);
 
-    $task_list = getTaskList($seed);
+    $parsedBody = $request->getParsedBody();
 
-    $data = ['seed' => $seed, 'list' => $task_list];
+    $lang = null;
+    if(array_key_exists('lang', $parsedBody)){
+        $lang = $parsedBody['lang'];
+    }
+    else{
+        $lang = 'en';
+    }
+
+    $flags = '';
+    if(array_key_exists('allow_cheat', $parsedBody) && $parsedBody['allow_cheat']){
+        $flags.='c';
+    }
+    if(array_key_exists('exclude_berries', $parsedBody) && $parsedBody['exclude_berries']){
+        $flags.='s';
+    }
+    if(array_key_exists('exclude_pico', $parsedBody) && $parsedBody['exclude_pico']){
+        $flags.='p';
+    }
+
+    list($task_list, $page_text) = getTaskList($seed, $lang, $flags);
+
+    $data = ['seed' => $seed, 'list' => $task_list, 'lang' => $lang];
+
+    if(array_key_exists('allow_cheat', $parsedBody)){
+        $data['allow_cheat'] = $parsedBody['allow_cheat'];
+    }
+    if(array_key_exists('exclude_berries', $parsedBody)){
+        $data['exclude_berries'] = $parsedBody['exclude_berries'];
+    }
+    if(array_key_exists('exclude_pico', $parsedBody)){
+        $data['exclude_pico'] = $parsedBody['exclude_pico'];
+    }
+
     return $response->withJson($data);
 });
 
 $app->post('/celeste/{seed:\w+}', function (Request $request, Response $response, array $args) {
     $seed = $args['seed'];
-    $task_list = getTaskList($seed);
+    $parsedBody = $request->getParsedBody();
 
-    $data = ['seed' => $seed, 'list' => $task_list];
+    $lang = null;
+    if(array_key_exists('lang', $parsedBody)){
+        $lang = $parsedBody['lang'];
+    }
+    else{
+        $lang = 'en';
+    }
+
+    $flags = '';
+    if(array_key_exists('allow_cheat', $parsedBody) && $parsedBody['allow_cheat']){
+        $flags.='c';
+    }
+    if(array_key_exists('exclude_berries', $parsedBody) && $parsedBody['exclude_berries']){
+        $flags.='s';
+    }
+    if(array_key_exists('exclude_pico', $parsedBody) && $parsedBody['exclude_pico']){
+        $flags.='p';
+    }
+
+    list($task_list, $page_text) = getTaskList($seed, $lang, $flags);
+
+    $data = ['seed' => $seed, 'list' => $task_list, 'lang' => $lang];
+
+    if(array_key_exists('allow_cheat', $parsedBody)){
+        $data['allow_cheat'] = $parsedBody['allow_cheat'];
+    }
+    if(array_key_exists('exclude_berries', $parsedBody)){
+        $data['exclude_berries'] = $parsedBody['exclude_berries'];
+    }
+    if(array_key_exists('exclude_pico', $parsedBody)){
+        $data['exclude_pico'] = $parsedBody['exclude_pico'];
+    }
+
     return $response->withJson($data);
 });
 
@@ -246,6 +310,10 @@ function getTaskLibrary($flags = []){
                         unset($task_library[$category][$key]);
                     }
                 }
+            }
+
+            if(!in_array('c',$flags) && array_key_exists('cheat', $task)){
+                unset($task_library[$category][$key]);
             }
         }
         $task_library[$category] = array_values($task_library[$category]);
