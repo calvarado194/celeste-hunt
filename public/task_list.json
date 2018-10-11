@@ -3,6 +3,7 @@
         {
             "_comment": "Collect Cassette Tape",
             "flags": [],
+            "weight": 0.7,
             "task_id": "cassette",
             "task_key": "CASSETTE_TAPE"
         },
@@ -11,6 +12,29 @@
             "flags": [],
             "task_id": "heart",
             "task_key": "CRYSTAL_HEART"
+        },
+        {
+            "_comment": "Collect Cassette Tape and Complete B-Side",
+            "flags": [],
+            "weight": 0.3,
+            "task_id": "cassette",
+            "task_key": "CASSETTE_B"
+        },
+        {
+            "_comment": "Complete B-Side",
+            "flags": [],
+            "cheat": true,
+            "weight": 0.2,
+            "task_id": "b-side",
+            "task_key": "B_SIDE"
+        },
+        {
+            "_comment": "Complete C-Side",
+            "flags": [],
+            "cheat": true,
+            "weight": 0.1,
+            "task_id": "c-side",
+            "task_key": "C_SIDE"
         }
     ],
     "strawberry": [
@@ -79,6 +103,10 @@
         {
             "_comment": "Get to the room prior to the Intervention cutscene before activating dream blocks",
             "task_key": "INTERVENTION_DREAM"
+        },
+        {
+            "_comment": "Find the poem in Awake and read it",
+            "task_key": "POEM"
         }
     ],
     "3": [
