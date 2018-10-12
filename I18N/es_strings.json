@@ -1,5 +1,5 @@
 {
-  "tasks":{
+  "TASKS":{
     "5_STRAWB": "Obtén 5 fresas",
     "10_STRAWB": "Obtén 10 fresas",
     "ALL_STRAWB": "Obtén todas las fresas",
@@ -7,36 +7,40 @@
     "WINGED_STRAWB": "Obtén una fresa con alas",
     "CASSETTE_TAPE": "Obtén la cinta cassette",
     "CRYSTAL_HEART": "Obtén el Corazón",
+    "CASSETTE_B": "Obtén el cassette y completa la Cara B",
+    "B_SIDE": "Completa la Cara B",
+    "C_SIDE": "Completa la Cara C",
     "THEO": "Encuentra a Theo y habla con él",
     "NO_DASH": "Completa 5 pantllas sin utilizar dashes",
     "INTERVENTION_STRAWB": "Obtén todas las fresas en la secuencia Intervención",
     "INTERVENTION_DREAM": "Entra a la habitación anterior a la secuenca Intervención, sin activar los dream blocks",
+    "POEM": "Encuentra el poema en la sección Vigilia",
     "PICO8": "Encuentra Celeste PICO-8 y llega a la cima",
     "PICO8_BERRY": "Encuentra Celeste PICO-8 y obtén 5 fresas",
     "PRESIDENTIAL_STRAWB": "Obtén todas las fresas en la sección Suite Presidencial",
     "SNOWBALL": "Rebota en 3 bolas de nieve",
-    "HIDDEN_PATH": "Toma el camino oculto hacia (Cliff Face)",
+    "HIDDEN_PATH": "Toma el camino oculto hacia la Cara del Acantilado",
     "THEO_CUTSCENE": "Activa la cutscene con Theo en la sección Búsqueda",
-    "THEO_STRAWB": "Obtén la fresa que se encuentra en la sección donde trasladas a Theo en un cristal",
+    "THEO_STRAWB": "Obtén la fresa que se encuentra en la sección Rescate",
     "SEEKER": "Mata un seeker",
     "SEEKER_RED_BLOCKS": "Destruye 5 bloques rojos usando seekers",
     "3_KEYS": "Obtén todas las llaves de la sección Búsqueda",
     "TOWERFALL": "Entra a la pantalla con personajes de Towerfall",
-    "KEVIN": "Golpea, con un dash, los 4 lados de un solo Kevin Block",
-    "FEATHERS_DREAM": "Obtén todas las plumas en el sueño",
+    "KEVIN": "Golpea, con dashes, los 4 lados de un solo Kevin Block",
+    "FEATHERS_DREAM": "Obtén todas las plumas en el inicio",
     "FEATHERS_LADY": "Obtén todas las plumas en la habitación grande, antes de ver a la anciana",
     "3_JEWELS": "Obtén 3 joyas",
     "3000M_CHECKPOINTS": "Activa todas las banderas en 3000m",
     "3000M_SKIP_5": "Esquiva 5 banderas en 3000m",
     "1000M_RIGHT": "En 1000m, toma la ruta hacia la derecha",
     "TRAFFIC_BLOCKS": "Activa, a lo más, 3 bloques semáforo",
-    "MESS_BOX_BOOK": "Complete the Huge Mess sequence boxes first, books last",
-    "MESS_BOOK_BOX": "Complete the Huge Mess sequence books first, boxes last",
-    "MESS_BOOK_LAUNDRY": "Complete the Huge Mess sequence books first, laundry last",
-    "MESS_LAUNDRY_BOX": "Complete the Huge Mess sequence laundry first, boxes last",
-    "MESS_LAUNDRY_BOOK": "Complete the Huge Mess sequence laundry first, books last"
+    "MESS_BOX_BOOK": "Completa la secuencia Gran Caos en este orden: cajas, libros, lavandería",
+    "MESS_BOOK_BOX": "Completa la secuencia Gran Caos en este orden: libros, lavandería, cajas",
+    "MESS_BOOK_LAUNDRY": "Completa la secuencia Gran Caos en este orden: libros, cajas, lavandería",
+    "MESS_LAUNDRY_BOX": "Completa la secuencia Gran Caos en este orden: lavandería, libros, cajas",
+    "MESS_LAUNDRY_BOOK": "Completa la secuencia Gran Caos en este orden: lavandería, cajas, libros"
   },
-  "chapters":{
+  "CHAPTERS":{
     "AREA_1": "Ciudad Olvidada",
     "AREA_2": "Ruinas",
     "AREA_3": "Celestial Resort",
@@ -46,14 +50,14 @@
     "AREA_7": "La cumbre",
     "AREA_8": "Núcleo"
   },
-  "website":{
-    "WHATS_THIS": "What's this?",
-    "SITE_DESCRIPTION": "Inspired by the <a href='http://www.speedrunslive.com/tools/oot-bingo/' target='_blank'>Ocarina of Time Bingo</a>, Celeste Hunt generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.",
-    "SEED_EXPLANATION": "Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.",
-    "CREDITS_1": "Made with love by <a href='https://twitter.com/this194' target='_blank'>Ikuyo</a>, <a href='https://github.com/fahseltc' target='_blank'>digdugdiggy</a> and <a href='https://github.com/Programmatic1' target='_blank'>Programmatic</a>",
-    "CREDITS_2": "Source code available <a href='https://github.com/calvarado194/celeste-bingo' target='_blank'>here</a> and Licensed under MIT License",
-    "CREDITS_3": "Celeste is owned by Matt Makes Games. Thanks for making this game, guys.",
-    "RESEED_BTN": "Reseed"
+  "WEBSITE":{
+    "WHATS_THIS": "Qué es esto?",
+    "SITE_DESCRIPTION": "Celeste Hunt, inspirado por el <a href='http://www.speedrunslive.com/tools/oot-bingo/' target='_blank'>Bingo de Ocarina of Time</a>, genera, dada una semilla, una lista de tareas a completar. Tu objetivo es muy simple: en un archivo nuevo, llega a la Cumbre y completa todas las tareas.",
+    "SEED_EXPLANATION": "Cada semilla es constante, asi que puedes compartirla simplemente copiando y pegando la URL en el navegador.",
+    "CREDITS_1": "Hecho con amor por <a href='https://twitter.com/this194' target='_blank'>Ikuyo</a>, <a href='https://github.com/fahseltc' target='_blank'>digdugdiggy</a> y <a href='https://github.com/Programmatic1' target='_blank'>Programmatic</a>",
+    "CREDITS_2": "Código fuente disponible <a href='https://github.com/calvarado194/celeste-bingo' target='_blank'>aquí</a>, bajo licencia MIT.",
+    "CREDITS_3": "Celeste es propiedad de Matt Makes Games. Muchas gracias por hacer este juego.",
+    "RESEED_BTN": "Nueva Semilla"
   }
   
 }
