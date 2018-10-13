@@ -189,18 +189,18 @@
         <div class="pure-u-1 pure-u-sm-3-4">
             <div class="trigger-container">
             <label class="trigger">
-                <span id="seal"></span> <input type="checkbox" class="checkbox"> Options
+                <span id="seal"></span> <input type="checkbox" class="checkbox"> <?PHP echo $page_text['OPTIONS']; ?>
                 <span class="msg">
                     <form class="pure-form pure-form-stacked" id="seed-options">
                         <fieldset>
                             <label for="no-pico" class="pure-checkbox">
-                                <input class="flag-select" style="opacity:1" value="p" id="p" type="checkbox" <?php if(in_array('p',$flags)): echo 'checked'; endif; ?>> Exclude PICO-8 tasks
+                                <input class="flag-select" style="opacity:1" value="p" id="p" type="checkbox" <?php if(in_array('p',$flags)): echo 'checked'; endif; ?>> <?PHP echo $page_text['EXCLUDE_PICO']; ?>
                             </label>
                             <label for="no-berries" class="pure-checkbox">
-                                <input class="flag-select" style="opacity:1" value="s" id="s" type="checkbox" <?php if(in_array('s',$flags)): echo 'checked'; endif; ?>> Exclude strawberry-related tasks
+                                <input class="flag-select" style="opacity:1" value="s" id="s" type="checkbox" <?php if(in_array('s',$flags)): echo 'checked'; endif; ?>> <?PHP echo $page_text['EXCLUDE_STRAWBS']; ?>
                             </label>
                             <label for="cheat" class="pure-checkbox">
-                                <input class="flag-select" style="opacity:1" value="c" id="c" type="checkbox" <?php if(in_array('c',$flags)): echo 'checked'; endif; ?>> Enable any% cheat mode
+                                <input class="flag-select" style="opacity:1" value="c" id="c" type="checkbox" <?php if(in_array('c',$flags)): echo 'checked'; endif; ?>> <?PHP echo $page_text['ALLOW_CHEAT']; ?>
                             </label>
                         </fieldset>
                     </form>
