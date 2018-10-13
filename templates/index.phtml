@@ -3,16 +3,68 @@
     <head>
         <meta charset="utf-8"/>
         <title>Celeste Hunt</title>
+        <meta name="description" content="A seeded task generator for your Celeste speedruns!" />
+        <meta property="og:title" content="Celeste Hunt" />
+        <meta property="og:description" content="A seeded task generator for your Celeste speedruns!" />
+        <meta property="og:image" content="/celeste/public/test-preview.png" />
         <link rel="shortcut icon" href="/celeste/public/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/celeste/public/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+        <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+<!--<![endif]-->
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
+        <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
+        <script type="text/javascript">
+
+            document.onkeydown = function(event) {
+                event = event || window.event;
+                if(event.code == "Space") {
+                    finishNextTask();
+                }
+            };
+
+            function finishNextTask() {
+                var taskRows = Array.from(document.getElementById('task-table').children[0].children);
+                var found = false;
+                taskRows.every((taskRow, key, arr) => {
+                    var taskData = Array.from(taskRow.children);
+                    taskData.every((data) => {
+                        if(!data.classList.contains('finished')) {
+                            finishTaskById(data.parentElement.id);
+                            found = true;
+                            return false;
+                        } else { return true;}
+                    });
+
+                    // every row is finished, so undo them all.
+                    if (Object.is(arr.length - 1, key) && !found) {
+                        taskRows.forEach((taskRow) => {
+                            finishTaskById(taskRow.id);
+                        });
+                    }
+                    return !found;
+                });
+            }
+
+            function finishTaskById(elementId) {
+                var tableRow = document.getElementById(elementId);
+                var tableDataArray = Array.from(tableRow.children);
+
+                tableDataArray.forEach((tableData) => {
+                    tableData.classList.toggle('finished');
+                });
+            }
+        </script>
+        <style>
             @font-face {
                 font-family: Renogare;
-                src: url("public/Renogare-Regular.otf") format("opentype");
+                src: url("public/Renogare-Regular.woff") format("opentype");
             }
 
             body{
@@ -33,14 +85,81 @@
                 font-family: 'Renogare', Arial, sans-serif;
             }
             .subhead{
-                margin-top: 1em;
                 color: #888;
             }
             @media only screen and (min-width:768px){
                 .chapter-header{
+                    font-weight: bold;
                     min-width: 140px;
                 }
             }
+            #reseed-btn{
+                float: right;
+                margin-top: 10px;
+            }
+            #lang-select{
+                float: right;
+                margin-top: 10px;
+                margin-right: 10px;
+            }
+            .trigger-container{
+                margin: 10px 5px;
+                padding: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .trigger{
+                width: 100%;
+                display: inline-block;
+            }
+            .trigger input[type="checkbox"]{
+                opacity: 0;
+            }
+            .trigger input[type="checkbox"] + span {
+                display: none;
+                opacity: 0;
+                transition: display 0s linear 0.33s, opacity 0.33s linear;
+            }
+            #seal:after {
+                content: '\02795'; /* Unicode character for "plus" sign (+) */
+                font-size: 13px;
+                color: #777;
+                float: left;
+                margin-left: 5px;
+            }
+
+            .trigger input[type="checkbox"]:checked + span {
+                display:inline-block;
+                opacity: 1;
+
+            transition-delay: 0s;
+            }
+
+            .msg {
+                display: inline-block;
+                width: 100%;
+                margin-top: 8px;
+                padding: 8px 12px;
+                border: 0px;
+                border-radius: 3px;
+            }
+
+            .finished {
+                color: white;
+                opacity: .4;
+                background-color: green !important;
+            }
+
+            .no-select {
+                /* This prevents text from being highlighted */
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                 -khtml-user-select: none; /* Konqueror HTML */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none;
+            }
+
         </style>
     </head>
     <body>
@@ -52,36 +171,118 @@
         <div class="content">
         <div class="pure-g">
         <div class="pure-u-1">
-        <table class="pure-table pure-table-striped" style="width: 100%">
+        <table id="task-table" class="pure-table pure-table-striped" style="width: 100%">
             <?php foreach($task_list as $chapter => $task): ?>
-                <tr>
-                    <td class="celeste-font chapter-header"><?=$chapter ?></td>
-                    <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
+                <tr id="<?php echo $chapter ?>" onClick="finishTaskById('<?php echo $chapter ?>')">
+                    <td class="no-select celeste-font chapter-header">
+                        <?=$chapter ?>
+                    </td>
+                    <td class="no-select celeste-font">
+                        <?=$task ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
-        </table>
-        <a style="float: right;margin-top: 10px;" href="https://oneninefour.cl/celeste/" class="pure-button celeste-font">Reseed</a>
+          </table>
+        </div>
+        </div>
+        <div class="pure-g">
+        <div class="pure-u-1 pure-u-sm-3-4">
+            <div class="trigger-container">
+            <label class="trigger">
+                <span id="seal"></span> <input type="checkbox" class="checkbox"> Options
+                <span class="msg">
+                    <form class="pure-form pure-form-stacked" id="seed-options">
+                        <fieldset>
+                            <label for="no-pico" class="pure-checkbox">
+                                <input class="flag-select" style="opacity:1" value="p" id="p" type="checkbox" <?php if(in_array('p',$flags)): echo 'checked'; endif; ?>> Exclude PICO-8 tasks
+                            </label>
+                            <label for="no-berries" class="pure-checkbox">
+                                <input class="flag-select" style="opacity:1" value="s" id="s" type="checkbox" <?php if(in_array('s',$flags)): echo 'checked'; endif; ?>> Exclude strawberry-related tasks
+                            </label>
+                            <label for="cheat" class="pure-checkbox">
+                                <input class="flag-select" style="opacity:1" value="c" id="c" type="checkbox" <?php if(in_array('c',$flags)): echo 'checked'; endif; ?>> Enable any% cheat mode
+                            </label>
+                        </fieldset>
+                    </form>
+                </span>
+            </label>
+            </div>
+        </div>
+        <div class="pure-u-1 pure-u-sm-1-4">
+
+        <!-- first statement should only take effect in development, when the web url is localhost -->
+        <?php if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'])): ?>
+            <a id="reseed-btn" href="http://localhost:8000/celeste/?flags=<?php echo implode($flags) ?>" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
+        <?php else: ?>
+            <!-- This second statement is used for production, when hosted anywhere but localhost. -->
+            <a id="reseed-btn" href="https://oneninefour.cl/celeste/?flags=<?php echo implode($flags) ?>" class="pure-button celeste-font"><?PHP echo $page_text['RESEED_BTN']; ?></a>
+        <?php endif; ?>
+        <form class="pure-form pure-form-stacked">
+            <fieldset> 
+                <select id="lang-select" style="margin-right:0px">
+                    <?php foreach($lang_options as $key => $value): ?>
+                        <?php if ($lang == $key): ?>
+                            <option value="<?=$key ?>" selected><?=$value ?></option>
+                        <?php else: ?>
+                            <option value="<?=$key ?>"><?=$value ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </fieldset>
+        </form>
         </div>
         </div>
         <div class="pure-g" style="padding:0 16px;">
             <div class="pure-u-1 u-sm-1-2">
-                <h2 class="celeste-font subhead">What's this?</h2>
-                <p>Inspired by the <a href="http://www.speedrunslive.com/tools/oot-bingo/" target="_blank">Ocarina of Time Bingo</a>, Celeste Hunt generates, given a seed, a randomly assigned list of tasks to complete. Your goal is, from a new file, to reach the Summit and achieve all the tasks.<p>
-                <p>Each seed is deterministic, so you can share your seed by copying and pasting the URL in your browser.</p>
+                <h2 class="celeste-font subhead"><?PHP echo $page_text['WHATS_THIS']; ?></h2>
+
+                <p><?PHP echo $page_text['SITE_DESCRIPTION']; ?><p>
+                <p><?PHP echo $page_text['SEED_EXPLANATION']; ?></p>
             </div>
         </div>
         </div>
         <div class="footer">
             <div class="credits pure-g">
                 <div class="pure-u-1 u-sm-1-2">
-                    Made with love by <a href="https://twitter.com/this194" target="_blank">Ikuyo</a>, <a href="https://github.com/fahseltc" target="_blank">digdugdiggy</a> and <a href="https://github.com/Programmatic1" target="_blank">Programmatic</a><br>
-                    Source code available <a href="https://github.com/calvarado194/celeste-bingo" target="_blank">here</a> and Licensed under MIT License<br> 
-                    Celeste is owned by Matt Makes Games. Thanks for making this game, guys. <br>
-                    version 1.1.1, 2018-10-04
+                    <?PHP echo $page_text['CREDITS_1']; ?><br>
+                    <?PHP echo $page_text['CREDITS_2']; ?><br>
+                    <?PHP echo $page_text['CREDITS_3']; ?>
                 </div>
             </div>
         </div>
         </div>
         </div>
+        <script type="text/javascript">
+            var lang_select = document.getElementById("lang-select");
+
+            lang_select.addEventListener("change", function() {
+                setCookie("lang", lang_select.value, 500);
+                window.location.reload();
+            });
+
+            function setFlags(){
+                var flag_checks = document.getElementsByClassName('flag-select');
+                var flags = '';
+
+                for(var i = 0; i < flag_checks.length; i++){
+                    if(flag_checks[i].checked){
+                        flags = flags + flag_checks[i].value;
+                    }
+                }
+
+                if(flags == ''){
+                    document.getElementById('reseed-btn').href = "https://oneninefour.cl/celeste/";
+                }
+                else{
+                    document.getElementById('reseed-btn').href = "https://oneninefour.cl/celeste/?flags=" + flags;
+                }
+            }
+            
+            var flag_checks = document.getElementsByClassName('flag-select');
+            for(var i = 0; i < flag_checks.length; i++){
+                flag_checks[i].addEventListener('change', setFlags);
+            }
+        </script>
+
     </body>
 </html>

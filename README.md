@@ -28,6 +28,9 @@ Calling the URL `https://oneninefour.cl/celeste/` via a POST request will return
 
 You can later call it again passing the seed as part of the URL (ex: `https://oneninefour.cl/celeste/fc56b42f3835b662`)
 
+### Supported languages
+['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh_hans']
+
 ## License
 
 Source code is licensed under the MIT License.
