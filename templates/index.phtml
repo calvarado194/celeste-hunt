@@ -22,15 +22,11 @@
         <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
         <script type="text/javascript">
             function change_color(elementId) {
-                var tdElement = document.getElementById(elementId);
-                var tableRows = Array.from(tdElement.children);
+                var tableRow = document.getElementById(elementId);
+                var tableDataArray = Array.from(tableRow.children);
 
-                tableRows.forEach((tableData) => {
-                    if(tableData.classList.contains('finished')) {
-                        tableData.classList.remove('finished');
-                    } else {
-                        tableData.classList.add('finished');
-                    }
+                tableDataArray.forEach((tableData) => {
+                    tableData.classList.toggle('finished')
                 });
             }
         </script>
