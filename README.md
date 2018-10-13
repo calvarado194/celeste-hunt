@@ -52,4 +52,5 @@ Source code is licensed under the MIT License.
 Thanks to the Celeste development team for making a game I will never forget.  
 Thanks to several friends that provided UX testing and assistance with front-end design.  
 Special thanks to Mathemagician for seed logic.
-Special thanks to [SebasContre](https://twitter.com/sebascontre) for additional coding and fixes.
+Special thanks to [SebasContre](https://twitter.com/sebascontre) for additional coding and fixes.  
+Special thanks to Nameguy for German translation
