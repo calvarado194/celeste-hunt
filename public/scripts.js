@@ -1,3 +1,0 @@
-function toggle_color() {
-	
-}
