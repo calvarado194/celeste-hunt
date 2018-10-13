@@ -20,7 +20,21 @@
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
-    <style>
+        <script type="text/javascript">
+            function change_color(elementId) {
+                var tdElement = document.getElementById(elementId);
+                var tableRows = Array.from(tdElement.children);
+
+                tableRows.forEach((tableData) => {
+                    if(tableData.classList.contains('finished')) {
+                        tableData.classList.remove('finished');
+                    } else {
+                        tableData.classList.add('finished');
+                    }
+                });
+            }
+        </script>
+        <style>
             @font-face {
                 font-family: Renogare;
                 src: url("public/Renogare-Regular.woff") format("opentype");
@@ -48,6 +62,7 @@
             }
             @media only screen and (min-width:768px){
                 .chapter-header{
+                    font-weight: bold;
                     min-width: 140px;
                 }
             }
@@ -101,6 +116,23 @@
                 border: 0px;
                 border-radius: 3px;
             }
+
+            .finished {
+                color: white;
+                opacity: .4;
+                background-color: green !important;
+            }
+
+            .no-select {
+                /* This prevents text from being highlighted */
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                 -khtml-user-select: none; /* Konqueror HTML */
+                   -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none;
+            }
+
         </style>
     </head>
     <body>
@@ -114,9 +146,13 @@
         <div class="pure-u-1">
         <table class="pure-table pure-table-striped" style="width: 100%">
             <?php foreach($task_list as $chapter => $task): ?>
-                <tr>
-                    <td class="celeste-font chapter-header"><?=$chapter ?></td>
-                    <td style="font-family:Helvetica, Arial, sans-serif"><?=$task ?></td>
+                <tr id="<?php echo $chapter ?>">
+                    <td onClick="change_color('<?php echo $chapter ?>')" class="no-select celeste-font chapter-header">
+                        <?=$chapter ?>
+                    </td>
+                    <td onClick="change_color('<?php echo $chapter ?>')" class="no-select celeste-font">
+                        <?=$task ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>
