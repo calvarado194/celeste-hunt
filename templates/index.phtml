@@ -21,12 +21,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="/celeste/public/jscookie.js"></script>
         <script type="text/javascript">
-            function change_color(elementId) {
+
+            document.onkeydown = function(event) {
+                event = event || window.event;
+                if(event.code == "Space") {
+                    finishNextTask();
+                }
+            };
+
+            function finishNextTask() {
+                var taskRows = Array.from(document.getElementById('task-table').children[0].children);
+                var found = false;
+                taskRows.every((taskRow, key, arr) => {
+                    var taskData = Array.from(taskRow.children);
+                    taskData.every((data) => {
+                        if(!data.classList.contains('finished')) {
+                            finishTaskById(data.parentElement.id);
+                            found = true;
+                            return false;
+                        } else { return true;}
+                    });
+
+                    // every row is finished, so undo them all.
+                    if (Object.is(arr.length - 1, key) && !found) {
+                        taskRows.forEach((taskRow) => {
+                            finishTaskById(taskRow.id);
+                        });
+                    }
+                    return !found;
+                });
+            }
+
+            function finishTaskById(elementId) {
                 var tableRow = document.getElementById(elementId);
                 var tableDataArray = Array.from(tableRow.children);
 
                 tableDataArray.forEach((tableData) => {
-                    tableData.classList.toggle('finished')
+                    tableData.classList.toggle('finished');
                 });
             }
         </script>
@@ -140,13 +171,13 @@
         <div class="content">
         <div class="pure-g">
         <div class="pure-u-1">
-        <table class="pure-table pure-table-striped" style="width: 100%">
+        <table id="task-table" class="pure-table pure-table-striped" style="width: 100%">
             <?php foreach($task_list as $chapter => $task): ?>
-                <tr id="<?php echo $chapter ?>">
-                    <td onClick="change_color('<?php echo $chapter ?>')" class="no-select celeste-font chapter-header">
+                <tr id="<?php echo $chapter ?>" onClick="finishTaskById('<?php echo $chapter ?>')">
+                    <td class="no-select celeste-font chapter-header">
                         <?=$chapter ?>
                     </td>
-                    <td onClick="change_color('<?php echo $chapter ?>')" class="no-select celeste-font">
+                    <td class="no-select celeste-font">
                         <?=$task ?>
                     </td>
                 </tr>
