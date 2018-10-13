@@ -22,14 +22,26 @@ Calling the URL `https://oneninefour.cl/celeste/` via a POST request will return
         "Mirror Temple":"Kill a seeker",
         "Reflection":"Collect Cassette Tape",
         "Summit":"Take the rightmost path at 1000m"
-    }
+    },
+    "lang": "en"
 }
 ```
 
 You can later call it again passing the seed as part of the URL (ex: `https://oneninefour.cl/celeste/fc56b42f3835b662`)
 
+You may pass the following arguments as JSON body to either request and they will be returned if present with the assigned value at the request:
+
+```javascript
+{
+    "lang": "es" (es, en. default "en"),
+    "exclude_pico": true (default false),
+    "exclude_berries": true (default false),
+    "allow_cheat": true (default false)
+}
+```
+
 ### Supported languages
-['de', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh_hans']
+['de', 'en', 'es']
 
 ## License
 
