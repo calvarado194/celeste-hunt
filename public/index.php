@@ -48,7 +48,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
            ->withMaxAge(500)
            ->rememberForever()
            ->withPath('/celeste')
-           ->withDomain('.oneninefour.cl')
+           ->withDomain('.dev.oneninefour.cl')
            ->withSecure(true)
            ->withHttpOnly(true));
     }
@@ -67,7 +67,7 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
            ->withMaxAge(500)
            ->rememberForever()
            ->withPath('/celeste')
-           ->withDomain('.oneninefour.cl')
+           ->withDomain('.dev.oneninefour.cl')
            ->withSecure(true)
            ->withHttpOnly(true));
     }
@@ -81,7 +81,7 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
 
     $flags = str_split($flags);
 
-    $lang_options = ['en' => 'English', 'es' => 'Español'];
+    $lang_options = ['en' => 'English', 'es' => 'Español', 'de' => 'German'];
     $response = $this->renderer->render($response, 'index.phtml', ['task_list' => $task_list, 'page_text' => $page_text['WEBSITE'], 'lang' => $lang->getValue(), 'lang_options' => $lang_options, 'flags' => $flags]);
     return $response;
 });

@@ -57,6 +57,10 @@
 	"CREDITS_1": "Made with love by <a href='https://twitter.com/this194' target='_blank'>Ikuyo</a>, <a href='https://github.com/fahseltc' target='_blank'>digdugdiggy</a> and <a href='https://github.com/Programmatic1' target='_blank'>Programmatic</a>",
 	"CREDITS_2": "Source code available <a href='https://github.com/calvarado194/celeste-bingo' target='_blank'>here</a> and Licensed under MIT License",
 	"CREDITS_3": "Celeste is owned by Matt Makes Games. Thanks for making this game, guys.",
-	"RESEED_BTN": "Reseed"
+	"RESEED_BTN": "Reseed",
+	"OPTIONS": "Options",
+	"EXCLUDE_STRAWBS": "Exclude strawberry-related tasks",
+	"EXCLUDE_PICO": "Exclude PICO-8 tasks",
+	"ALLOW_CHEAT": "Enable any% cheat mode"
   }
 }
