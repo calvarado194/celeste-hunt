@@ -149,17 +149,6 @@
                 opacity: .4;
                 background-color: green !important;
             }
-
-            .no-select {
-                /* This prevents text from being highlighted */
-                -webkit-touch-callout: none; /* iOS Safari */
-                -webkit-user-select: none; /* Safari */
-                 -khtml-user-select: none; /* Konqueror HTML */
-                   -moz-user-select: none; /* Firefox */
-                    -ms-user-select: none; /* Internet Explorer/Edge */
-                        user-select: none;
-            }
-
         </style>
     </head>
     <body>
@@ -174,10 +163,10 @@
         <table id="task-table" class="pure-table pure-table-striped" style="width: 100%">
             <?php foreach($task_list as $chapter => $task): ?>
                 <tr id="<?php echo $chapter ?>" onClick="finishTaskById('<?php echo $chapter ?>')">
-                    <td class="no-select celeste-font chapter-header">
+                    <td class="celeste-font chapter-header">
                         <?=$chapter ?>
                     </td>
-                    <td class="no-select celeste-font">
+                    <td class="celeste-font">
                         <?=$task ?>
                     </td>
                 </tr>
