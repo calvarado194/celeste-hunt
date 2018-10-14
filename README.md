@@ -1,4 +1,4 @@
-# celeste-bingo
+# celeste-hunt
 A shared-seed bingo scavenger hunt randomizer for Celeste speedruns!
 
 ## Usage
