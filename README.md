@@ -41,7 +41,7 @@ You may pass the following arguments as JSON body to either request and they wil
 ```
 
 ### Supported languages
-['en', 'es']
+['de', 'en', 'es']
 
 ## License
 
