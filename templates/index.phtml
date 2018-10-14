@@ -25,6 +25,7 @@
             document.onkeydown = function(event) {
                 event = event || window.event;
                 if(event.code == "Space") {
+                    event.preventDefault();
                     finishNextTask();
                 }
             };
