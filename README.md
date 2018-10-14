@@ -1,5 +1,5 @@
 # celeste-bingo
-A shared-seed bingo randomizer for Celeste speedruns!
+A shared-seed bingo scavenger hunt randomizer for Celeste speedruns!
 
 ## Usage
 
