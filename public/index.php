@@ -48,7 +48,7 @@ $app->get('/celeste/', function (Request $request, Response $response, array $ar
            ->withMaxAge(500)
            ->rememberForever()
            ->withPath('/celeste')
-           ->withDomain('.dev.oneninefour.cl')
+           ->withDomain('.oneninefour.cl')
            ->withSecure(true)
            ->withHttpOnly(true));
     }
@@ -67,7 +67,7 @@ $app->get('/celeste/{seed:\w+}', function (Request $request, Response $response,
            ->withMaxAge(500)
            ->rememberForever()
            ->withPath('/celeste')
-           ->withDomain('.dev.oneninefour.cl')
+           ->withDomain('.oneninefour.cl')
            ->withSecure(true)
            ->withHttpOnly(true));
     }
