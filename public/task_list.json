@@ -5,20 +5,23 @@
             "flags": [],
             "weight": 0.7,
             "task_id": "cassette",
-            "task_key": "CASSETTE_TAPE"
+            "task_key": "CASSETTE_TAPE",
+            "difficulty": 3
         },
         {
             "_comment": "Collect Crystal Heart",
             "flags": [],
             "task_id": "heart",
-            "task_key": "CRYSTAL_HEART"
+            "task_key": "CRYSTAL_HEART",
+            "difficulty": 3
         },
         {
             "_comment": "Collect Cassette Tape and Complete B-Side",
             "flags": [],
             "weight": 0.3,
             "task_id": "cassette",
-            "task_key": "CASSETTE_B"
+            "task_key": "CASSETTE_B",
+            "difficulty": 7
         },
         {
             "_comment": "Complete B-Side",
@@ -26,7 +29,8 @@
             "cheat": true,
             "weight": 0.2,
             "task_id": "b-side",
-            "task_key": "B_SIDE"
+            "task_key": "B_SIDE",
+            "difficulty": 5
         },
         {
             "_comment": "Complete C-Side",
@@ -34,7 +38,8 @@
             "cheat": true,
             "weight": 0.1,
             "task_id": "c-side",
-            "task_key": "C_SIDE"
+            "task_key": "C_SIDE",
+            "difficulty": 8
         }
     ],
     "strawberry": [
@@ -43,70 +48,82 @@
             "flags": ["s"],
             "task_id": "nBerries",
             "weight": 0.6,
-            "task_key": "5_STRAWB"
+            "task_key": "5_STRAWB",
+            "difficulty": 3
         },
         {
             "_comment": "Collect 10 strawberries",
             "flags": ["s"],
             "task_id": "nBerries",
             "weight": 0.6,
-            "task_key": "10_STRAWB"
+            "task_key": "10_STRAWB",
+            "difficulty": 4
         },
         {
             "_comment": "Collect all strawberries",
             "flags": ["s", "a"],
             "task_id": "nBerries",
             "weight": 0.2,
-            "task_key": "ALL_STRAWB"
+            "task_key": "ALL_STRAWB",
+            "difficulty": 6
         },
         {
             "_comment": "Collect a winged strawberry",
             "flags": ["s"],
             "task_id": "winged",
             "weight": 0.6,
-            "task_key": "WINGED_STRAWB"
+            "task_key": "WINGED_STRAWB",
+            "difficulty": 1
         },
         {
             "_comment": "Collect 3 strawberries simultaneously",
             "flags": ["s"],
             "task_id": "chainBerries",
-            "task_key": "CHAIN_BERRIES"
+            "task_key": "CHAIN_BERRIES",
+            "difficulty": 6
         }
     ],
     "1": [
         {
             "_comment": "Find and talk to Theo",
             "task_id": "theo",
-            "task_key": "THEO"
+            "task_key": "THEO",
+            "difficulty": 0
         },
         {
             "_comment": "Beat 5 rooms without dashing",
-            "task_key": "NO_DASH"
+            "task_key": "NO_DASH",
+            "difficulty": 2
         },
         {
             "_comment": "Activate no more than 3 traffice blocks",
-            "task_key": "TRAFFIC_BLOCKS"
+            "task_key": "TRAFFIC_BLOCKS",
+            "difficulty": 4
         }
     ],
     "2": [
         {
             "_comment": "Find and talk to Theo",
             "task_id": "theo",
-            "task_key": "THEO"
+            "task_key": "THEO",
+            "difficulty": 0
         },
         {
             "_comment": "Collect all strawberries in the Intervention sequence",
             "flags": ["s","a"],
             "task_id": "sequenceBerries",
-            "task_key": "INTERVENTION_STRAWB"
+            "task_key": "INTERVENTION_STRAWB",
+            "difficulty": 6
         },
         {
             "_comment": "Get to the room prior to the Intervention cutscene before activating dream blocks",
-            "task_key": "INTERVENTION_DREAM"
+            "task_key": "INTERVENTION_DREAM",
+            "difficulty": 5
         },
         {
             "_comment": "Find the poem in Awake and read it",
-            "task_key": "POEM"
+            "task_key": "POEM",
+            "difficulty": 0
         }
     ],
     "3": [
@@ -114,118 +131,141 @@
             "_comment": "Find and beat Celeste PICO-8",
             "weight": 0.5,
             "flags": ["p"],
-            "task_key": "PICO8"
+            "task_key": "PICO8",
+            "difficulty": 1
         },
         {
             "_comment": "Find Celeste PICO-8 and collect 5 berries in it",
             "flags": ["p", "s"],
             "weight": 0.5,
-            "task_key": "PICO8_BERRY"
+            "task_key": "PICO8_BERRY",
+            "difficulty": 2
         },
         {
             "_comment": "Collect all strawberries in the Presidential Suite sequence",
             "flags": ["s","a"],
             "task_id": "sequenceBerries",
-            "task_key": "PRESIDENTIAL_STRAWB"
+            "task_key": "PRESIDENTIAL_STRAWB",
+            "difficulty": 2
         },
         {
             "_comment": "Complete the huge mess sequence in alternative orders",
             "weight": 0.2,
-            "task_key": "MESS_BOX_BOOK"
+            "task_key": "MESS_BOX_BOOK",
+            "difficulty": 2
         },
         {
             "weight": 0.2,
-            "task_key": "MESS_BOOK_BOX"
+            "task_key": "MESS_BOOK_BOX",
+            "difficulty": 2
         },
         {
             "weight": 0.2,
-            "task_key": "MESS_BOOK_LAUNDRY"
+            "task_key": "MESS_BOOK_LAUNDRY",
+            "difficulty": 2
         },
         {
             "weight": 0.2,
-            "task_key": "MESS_LAUNDRY_BOX"
+            "task_key": "MESS_LAUNDRY_BOX",
+            "difficulty": 2
         },
         {
             "weight": 0.2,
-            "task_key": "MESS_LAUNDRY_BOOK"
+            "task_key": "MESS_LAUNDRY_BOOK",
+            "difficulty": 2
         }
     ],
     "4": [
         {
             "_comment": "Bounce off 3 snowballs",
-            "task_key": "SNOWBALL"
+            "task_key": "SNOWBALL",
+            "difficulty": 1
         },
         {
             "_comment": "Take the hidden path to Cliff Face",
-            "task_key": "HIDDEN_PATH"
+            "task_key": "HIDDEN_PATH",
+            "difficulty": 1
         }
     ],
     "5": [
         {
             "_comment": "Activate the Theo cutscene in the Search sequence",
             "task_id": "theo",
-            "task_key": "THEO_CUTSCENE"
+            "task_key": "THEO_CUTSCENE",
+            "difficulty": 0
         },
         {
             "_comment": "Collect the strawberry during the crystal Theo sequence",
             "flags": ["s","a"],
             "task_id": "sequenceBerries",
-            "task_key": "THEO_STRAWB"
+            "task_key": "THEO_STRAWB",
+            "difficulty": 3
         },
         {
             "_comment": "Kill a seeker",
-            "task_key": "SEEKER"
+            "task_key": "SEEKER",
+            "difficulty": 1
         },
         {
             "_comment": "Collect all 3 keys in Search",
-            "task_key": "3_KEYS"
+            "task_key": "3_KEYS",
+            "difficulty": 2
         },
         {
             "_comment": "Destroy 5 red blocks using seekers",
-            "task_key": "SEEKER_RED_BLOCKS"
+            "task_key": "SEEKER_RED_BLOCKS",
+            "difficulty": 2
         }
     ],
     "6": [
         {
             "_comment": "Reach the Towerfall room",
-            "task_key": "TOWERFALL"
+            "task_key": "TOWERFALL",
+            "difficulty": 0
         },
         {
             "_comment": "Hit all 4 sides of a single Kevin block",
-            "task_key": "KEVIN"
+            "task_key": "KEVIN",
+            "difficulty": 1
         },
         {
             "_comment": "Collect all feathers in the dream sequence",
             "flags": ["a"],
             "weight": 0.5,
-            "task_key": "FEATHERS_DREAM"
+            "task_key": "FEATHERS_DREAM",
+            "difficulty": 2
         },
         {
             "_comment": "Collect all feathers in the room 2 rooms before Old Lady",
             "flags": ["a"],
             "weight": 0.5,
-            "task_key": "FEATHERS_LADY"
+            "task_key": "FEATHERS_LADY",
+            "difficulty": 2
         }
     ],
 
     "7": [
         {
             "_comment": "Collect 3 jewels",
-            "task_key": "3_JEWELS"
+            "task_key": "3_JEWELS",
+            "difficulty": 2
         },
         {
             "_comment": "Activate all checkpoints in 3000m",
             "weight": 0.5,
-            "task_key": "3000M_CHECKPOINTS"
+            "task_key": "3000M_CHECKPOINTS",
+            "difficulty": 2
         },
         {
             "_comment": "Skip 5 checkpoints in 3000m",
             "weight": 0.5,
-            "task_key": "3000M_SKIP_5"
+            "task_key": "3000M_SKIP_5",
+            "difficulty": 5
         },
         {
             "_comment": "Take the rightmost path at 1000m",
-            "task_key": "1000M_RIGHT"
+            "task_key": "1000M_RIGHT",
+            "difficulty": 1
         }
     ]
 }
